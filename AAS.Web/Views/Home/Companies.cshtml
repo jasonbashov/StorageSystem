@@ -3,8 +3,21 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
+<div class="jumbotron">
+    <h4>
+        Here you can view all companies registered in our system.
+        <br />
+        Also you can register new company or view your registered companies.
+    </h4>
+    <span>
+        @Html.ActionLink("Create new company", "CreateNewCompany", "Company", null, new { @class = "btn btn-success" })
+    </span>
+    <span>
+        @Html.ActionLink("View registered companies", "ViewRegisteredCompanies", "Company", null, new { @class = "btn btn-default" })
+    </span>
+    <span>
+        @Html.ActionLink("View your registered companies", "CreateNewCompany", "Company", null, new { @class = "btn btn-info" })
+    </span>
+</div>
 
-@Html.ActionLink("Create new company", "CreateNewCompany", "Companies")
-@Html.ActionLink("View registered companies", "ViewRegisteredCompanies", "Companies")
 

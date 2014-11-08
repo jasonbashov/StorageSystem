@@ -9,7 +9,7 @@
     using AAS.Models;
     using AAS.Web.Models;
 
-    public class CompaniesController : BaseController
+    public class CompanyController : BaseController
     {
         // GET: Companies
         public ActionResult Index()
@@ -17,7 +17,7 @@
             return View();
         }
 
-        [OutputCache(Duration = 15 * 60)]
+        //[OutputCache(Duration = 15 * 60)]
         public ActionResult ViewRegisteredCompanies()
         {
             var companies = this.Data.Companies.All().ToList();
@@ -64,6 +64,21 @@
             TempData["Success"] = "Company created successfuly";
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult ViewCompanyDetails(int id)
+        {
+            var searchedCompany = this.Data.Companies.All().FirstOrDefault(c => c.Id == id);
+
+            if (searchedCompany == null)
+            {
+                return View("Error");
+            }
+
+            //TODO: create new company view model
+
+            return View(searchedCompany);
         }
     }
 }

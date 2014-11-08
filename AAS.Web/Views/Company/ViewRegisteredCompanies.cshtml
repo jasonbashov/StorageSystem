@@ -1,0 +1,49 @@
+﻿@model IList<AAS.Models.Company>
+
+<h2>Registered companies</h2>
+
+@*<table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Column heading</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in Model)
+            {
+                <tr>
+                    <td>@company.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+@*@for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <p class="panel-title">
+                        @Html.ActionLink(Model[i].Name, "ViewCompanyDetails", "Company", null, new object{ id = Model[i].Id.ToString() })
+                    </p>
+                </div>
+                <div class="panel-body">
+                    HERE COME THE IMG
+                </div>
+            </div>
+        </div>
+    }*@
+@foreach (var company in Model)
+{
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <p class="panel-title">
+                    @Html.ActionLink(company.Name, "ViewCompanyDetails", "Company", new { id = company.Id }, null)
+                </p>
+            </div>
+            <div class="panel-body">
+                HERE COME THE IMG
+            </div>
+        </div>
+    </div>
+}
