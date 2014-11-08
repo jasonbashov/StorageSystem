@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace AAS.Models
+﻿namespace AAS.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+
     public class Sale
     {
+        private ICollection<Stock> stocks;
+
+        public Sale()
+        {
+            this.stocks = new HashSet<Stock>();
+
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -24,7 +32,20 @@ namespace AAS.Models
 
         [Required]
         public int CompanyId { get; set; }
-        
+
         public virtual Company Company { get; set; }
+
+        public virtual ICollection<Stock> Stocks
+        {
+            get
+            {
+                return this.stocks;
+            }
+
+            set
+            {
+                this.stocks = value;
+            }
+        }
     }
 }

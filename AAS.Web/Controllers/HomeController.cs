@@ -26,5 +26,12 @@ namespace AAS.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Companies()
+        {
+            ViewBag.Message = "Register new company. View registered companies. View my companies";
+
+            return View();
+        }
     }
 }

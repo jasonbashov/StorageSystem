@@ -4,7 +4,7 @@
 
     using AAS.Data.Repositories;
 
-    interface IAASData
+    public interface IAASData
     {
         IRepository<ApplicationUser> Users { get; }
 

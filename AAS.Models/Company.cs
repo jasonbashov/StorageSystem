@@ -30,6 +30,11 @@ namespace AAS.Models
 
         public virtual Owner Owner { get; set; }
 
+        public string Adress { get; set; }
+        
+        [Required]
+        public string Bulstrad { get; set; }
+
         public virtual ICollection<Client> Clients
         {
             get
