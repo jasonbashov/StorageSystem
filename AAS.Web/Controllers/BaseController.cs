@@ -22,7 +22,6 @@
 
         protected IAASData Data;
 
-
         public BaseController()
             : this(new AASData(new ApplicationDbContext()))
         {

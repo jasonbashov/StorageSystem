@@ -6,8 +6,23 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    @Html.EditorForModel()
-    <input type="submit" title="Create"  />    
+    @Html.LabelFor(m => Model.Name)
+    @Html.TextBoxFor(m => Model.Name)
+    <br />
+    @Html.LabelFor(m => Model.Adress)
+    @Html.TextBoxFor(m => Model.Adress)
+    <br />
+    @Html.LabelFor(m => Model.Bulstrad)
+    @Html.TextBoxFor(m => Model.Bulstrad)
+    <br />
+    @Html.LabelFor(m => Model.AccountablePerson)
+    @Html.TextBoxFor(m => Model.AccountablePerson)
+    <br />
+    @Html.LabelFor(m => Model.ImgUrl)
+    @Html.TextBoxFor(m => Model.ImgUrl)
+    <br />
+    //@Html.EditorForModel()
+    <input type="submit" value="Create"  />    
     //or this way:
     // @Html.TextBoxFor(m => m.Name, new { @class = "rndClass"})             
 }

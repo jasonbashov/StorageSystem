@@ -9,7 +9,10 @@
     using AAS.Models;
     using AAS.Web.Models;
 
-    public class CompanyController : BaseController
+    using AutoMapper.QueryableExtensions;
+    using AAS.Web.Models.Company;
+
+    public class CompanyController : AuthorizeUserController
     {
         // GET: Companies
         public ActionResult Index()
@@ -19,6 +22,7 @@
 
         //[OutputCache(Duration = 15 * 60)]
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult ViewRegisteredCompanies(int id)
         {
             if (id < 0)
@@ -27,7 +31,11 @@
             }
             var pageSize = 6;
 
-            var companies = this.Data.Companies.All().OrderBy(c => c.Name).Skip(id * pageSize).Take(pageSize).ToList();
+            var companies = this.Data.Companies.All()
+                                     .OrderBy(c => c.Name)
+                                     .Skip(id * pageSize)
+                                     .Take(pageSize)
+                                     .AsQueryable().Project().To<CompanyDetailsViewModel>().ToList();
 
             return View(companies);
         }
@@ -36,8 +44,18 @@
         public ActionResult CreateNewCompany()
         {
             //TODO return createNewCompany Input Model
+            var currentUserId = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(this.User.Identity);
 
-            return View();
+            var currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
+            
+            if (currentUserAsOwner == null)
+            {
+                return View();
+            }
+
+            var newCompany = new CompanyInputModel() { AccountablePerson = currentUserAsOwner.FullName };
+
+            return View(newCompany);
         }
 
         [HttpPost]
@@ -82,14 +100,12 @@
         [HttpGet]
         public ActionResult ViewCompanyDetails(int id)
         {
-            var searchedCompany = this.Data.Companies.All().FirstOrDefault(c => c.Id == id);
+            var searchedCompany = this.Data.Companies.All().AsQueryable().Project().To<CompanyDetailsViewModel>().FirstOrDefault(c => c.Id == id);
 
             if (searchedCompany == null)
             {
                 return View("Error");
             }
-
-            //TODO: create new company view model
 
             return View(searchedCompany);
         }
@@ -110,7 +126,12 @@
             var pageSize = 6;
 
             var owner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == this.CurrentUser.Id);
-            var myCompanies = this.Data.Companies.All().Where(c => c.OwnerId == owner.Id).OrderBy(c => c.Name).Skip(id * pageSize).Take(pageSize).ToList();
+            var myCompanies = this.Data.Companies.All()
+                                       .Where(c => c.OwnerId == owner.Id)
+                                       .OrderBy(c => c.Name)
+                                       .Skip(id * pageSize)
+                                       .Take(pageSize)
+                                       .AsQueryable().Project().To<CompanyDetailsViewModel>().ToList();
 
             return View(myCompanies);
         }
