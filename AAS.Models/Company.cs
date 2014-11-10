@@ -34,6 +34,8 @@ namespace AAS.Models
         
         [Required]
         public string Bulstrad { get; set; }
+                
+        public string ImgUrl { get; set; }
 
         public virtual ICollection<Client> Clients
         {

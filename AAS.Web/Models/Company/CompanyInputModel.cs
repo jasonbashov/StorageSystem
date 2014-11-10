@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace AAS.Web.Models
+﻿namespace AAS.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class CompanyInputModel
     {
         [Required]
@@ -11,6 +12,11 @@ namespace AAS.Web.Models
         
         [Required]
         public string Bulstrad { get; set; }
+
+        [Required]
+        public string AccountablePerson { get; set; }
+
+        public string ImgUrl { get; set; }
 
     }
 }

@@ -42,7 +42,12 @@
                 return View(company);
             }
 
-            var newCompany = new Company() { Name = company.Name, Adress = company.Adress, Bulstrad = company.Bulstrad };
+            if (company.ImgUrl == null)
+            {
+                company.ImgUrl = "http://www.securitypros.co.za/images/frontend/main/file_1379335265.png";
+            }
+
+            var newCompany = new Company() { Name = company.Name, Adress = company.Adress, Bulstrad = company.Bulstrad, ImgUrl = company.ImgUrl };
             var currentUserId = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(this.User.Identity);
 
             var currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
@@ -79,6 +84,20 @@
             //TODO: create new company view model
 
             return View(searchedCompany);
+        }
+
+        [HttpGet]
+        public ActionResult ViewMyCompanies()
+        {
+            if (!this.Data.Owners.All().Any(o => o.UserId == this.CurrentUser.Id))
+            {
+                return RedirectToAction("CreateNewCompany");
+            }
+
+            var owner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == this.CurrentUser.Id);
+            var myCompanies = this.Data.Companies.All().Where(c => c.OwnerId == owner.Id).ToList();
+
+            return View("ViewRegisteredCompanies" ,myCompanies);
         }
     }
 }
