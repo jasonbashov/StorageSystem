@@ -44,18 +44,18 @@
         public ActionResult CreateNewCompany()
         {
             //TODO return createNewCompany Input Model
-            var currentUserId = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(this.User.Identity);
+            //var currentUserId = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(this.User.Identity);
 
-            var currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
+            //var currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
             
-            if (currentUserAsOwner == null)
-            {
-                return View();
-            }
+            //if (currentUserAsOwner == null)
+            //{
+            //    return View();
+            //}
 
-            var newCompany = new CompanyInputModel() { AccountablePerson = currentUserAsOwner.FullName };
+            //var newCompany = new CompanyInputModel() { AccountablePerson = currentUserAsOwner.FullName };
 
-            return View(newCompany);
+            return View();
         }
 
         [HttpPost]
@@ -73,7 +73,14 @@
                 company.ImgUrl = "http://www.securitypros.co.za/images/frontend/main/file_1379335265.png";
             }
 
-            var newCompany = new Company() { Name = company.Name, Adress = company.Adress, Bulstrad = company.Bulstrad, ImgUrl = company.ImgUrl };
+            var newCompany = new Company()
+            {
+                Name = company.Name,
+                Adress = company.Adress,
+                Bulstrad = company.Bulstrad,
+                ImgUrl = company.ImgUrl,
+                AccountablePerson = company.AccountablePerson
+            };
             var currentUserId = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(this.User.Identity);
 
             var currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
@@ -81,7 +88,7 @@
             //if there is no such owner - make the current user owner
             if (currentUserAsOwner == null)
             {
-                this.Data.Owners.Add(new Owner() { UserId = currentUserId, FullName = company.AccountablePerson });
+                this.Data.Owners.Add(new Owner() { UserId = currentUserId });
                 this.Data.SaveChanges();
                 currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
             }
@@ -106,6 +113,8 @@
             {
                 return View("Error");
             }
+
+            ViewBag.UserId = this.CurrentUser.Id;
 
             return View(searchedCompany);
         }
@@ -134,6 +143,12 @@
                                        .AsQueryable().Project().To<CompanyDetailsViewModel>().ToList();
 
             return View(myCompanies);
+        }
+
+        [HttpGet]
+        public ActionResult ManageMyCompany(int id)
+        {
+            return View();
         }
     }
 }

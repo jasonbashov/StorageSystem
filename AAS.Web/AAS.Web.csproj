@@ -199,6 +199,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -281,6 +282,8 @@
     <Content Include="Views\Company\CreateNewCompany.cshtml" />
     <Content Include="Views\Company\ViewCompanyDetails.cshtml" />
     <Content Include="Views\Company\ViewMyCompanies.cshtml" />
+    <Content Include="Views\Company\ManageMyCompany.cshtml" />
+    <Content Include="Views\Stock\ViewMyStocks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

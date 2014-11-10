@@ -4,6 +4,12 @@
 }
 
 <h2>Company @Model.Name Details</h2>
+
+@if (Model.Owner.UserId == ViewBag.UserId)
+{
+    @Html.ActionLink("Manage", "ManageMyCompany", "Company", new { id = Model.Id }, new { @class = "btn btn-default" });
+}
+
 <div class="row">
     <div class="jumbotron">
         <div class="row">
@@ -12,7 +18,7 @@
                     Name: @Model.Name
                 </h3>
                 <h4>
-                    Owner: @Model.Owner.FullName
+                    Accountable Person: @Model.AccountablePerson
                 </h4>
                 <h5>
                     Address: @Model.Adress

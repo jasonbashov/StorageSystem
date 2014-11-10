@@ -36,6 +36,8 @@ namespace AAS.Models
         public string Bulstrad { get; set; }
                 
         public string ImgUrl { get; set; }
+        
+        public string AccountablePerson { get; set; }
 
         public virtual ICollection<Client> Clients
         {

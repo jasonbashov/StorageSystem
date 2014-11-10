@@ -7,6 +7,11 @@
     {
         <h3>@TempData["Success"]</h3>
     }
+
+    if (TempData["Error"] != null)
+    {
+        <h3>@TempData["Error"]</h3>
+    }
 }
 
 <div class="jumbotron">

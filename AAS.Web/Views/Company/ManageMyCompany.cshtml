@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "ManageMyCompany";
+}
+
+<h2>Manage My Company</h2>
+
+@Html.ActionLink("View my stocks", "ViewMyStocks", "Stock",
+                 new { id = @Url.RequestContext.RouteData.Values["id"] },
+                 new { @class = "btn btn-default" })
+
+<a href="">View my sales</a>
+<a href="">Add new product</a>
+<a href="">Make new sale</a>
+

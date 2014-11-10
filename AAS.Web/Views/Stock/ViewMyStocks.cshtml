@@ -1,0 +1,8 @@
+﻿@model IList<AAS.Models.Stock>
+
+<h2>View My Stocks</h2>
+
+@foreach (var stock in Model)
+{
+    <h3>@stock.Name</h3>
+}
