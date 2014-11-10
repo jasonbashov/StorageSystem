@@ -42,6 +42,7 @@
                 return View(company);
             }
 
+            //give default picture
             if (company.ImgUrl == null)
             {
                 company.ImgUrl = "http://www.securitypros.co.za/images/frontend/main/file_1379335265.png";
@@ -55,7 +56,7 @@
             //if there is no such owner - make the current user owner
             if (currentUserAsOwner == null)
             {
-                this.Data.Owners.Add(new Owner() { UserId = currentUserId });
+                this.Data.Owners.Add(new Owner() { UserId = currentUserId, FullName = company.AccountablePerson });
                 this.Data.SaveChanges();
                 currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
             }
