@@ -1,0 +1,44 @@
+﻿@model IList<AAS.Models.Company>
+
+<h2>My Companies</h2>
+
+<div class="row">
+    <div id="container">
+        @foreach (var company in Model)
+        {
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">
+                        <p class="panel-title">
+                            @Html.ActionLink(company.Name, "ViewCompanyDetails", "Company", new { id = company.Id }, null)
+                        </p>
+                    </div>
+                    <div class="panel-body text-center">
+                        <a href="@Url.Action("ViewCompanyDetails", "Company", new { id = @company.Id })"><img src="@company.ImgUrl" alt="company img" width="150" height="200" /></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <ul class="pager">
+        <li>
+            @Html.ActionLink("Previous",
+                        "ViewMyCompanies",
+                        new
+                        {
+                            id = (int.Parse(@Url.RequestContext.RouteData.Values["id"].ToString()) - 1)
+                        })
+
+        </li>
+        <li>
+            @Html.ActionLink("Next",
+                        "ViewMyCompanies",
+                        new
+                        {
+                            id = (int.Parse(@Url.RequestContext.RouteData.Values["id"].ToString()) + 1)
+                        })
+        </li>
+    </ul>
+</div>

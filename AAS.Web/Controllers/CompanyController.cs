@@ -18,9 +18,16 @@
         }
 
         //[OutputCache(Duration = 15 * 60)]
-        public ActionResult ViewRegisteredCompanies()
+        [HttpGet]
+        public ActionResult ViewRegisteredCompanies(int id)
         {
-            var companies = this.Data.Companies.All().ToList();
+            if (id < 0)
+            {
+                return RedirectToAction("ViewRegisteredCompanies", new { id = 0 });
+            }
+            var pageSize = 6;
+
+            var companies = this.Data.Companies.All().OrderBy(c => c.Name).Skip(id * pageSize).Take(pageSize).ToList();
 
             return View(companies);
         }
@@ -88,17 +95,24 @@
         }
 
         [HttpGet]
-        public ActionResult ViewMyCompanies()
+        public ActionResult ViewMyCompanies(int id)
         {
             if (!this.Data.Owners.All().Any(o => o.UserId == this.CurrentUser.Id))
             {
                 return RedirectToAction("CreateNewCompany");
             }
 
-            var owner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == this.CurrentUser.Id);
-            var myCompanies = this.Data.Companies.All().Where(c => c.OwnerId == owner.Id).ToList();
+            if (id < 0)
+            {
+                return RedirectToAction("ViewMyCompanies", new { id = 0 });
+            }
 
-            return View("ViewRegisteredCompanies" ,myCompanies);
+            var pageSize = 6;
+
+            var owner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == this.CurrentUser.Id);
+            var myCompanies = this.Data.Companies.All().Where(c => c.OwnerId == owner.Id).OrderBy(c => c.Name).Skip(id * pageSize).Take(pageSize).ToList();
+
+            return View(myCompanies);
         }
     }
 }

@@ -13,10 +13,10 @@
         @Html.ActionLink("Create new company", "CreateNewCompany", "Company", null, new { @class = "btn btn-success" })
     </span>
     <span>
-        @Html.ActionLink("View registered companies", "ViewRegisteredCompanies", "Company", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("View registered companies", "ViewRegisteredCompanies", "Company", new { id = 0 }, new { @class = "btn btn-default" })
     </span>
     <span>
-        @Html.ActionLink("View your registered companies", "ViewMyCompanies", "Company", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("View your registered companies", "ViewMyCompanies", "Company", new { id = 0 }, new { @class = "btn btn-info" })
     </span>
 </div>
 

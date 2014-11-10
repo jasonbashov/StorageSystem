@@ -1,13 +1,13 @@
 ﻿@model AAS.Web.Models.CompanyInputModel
 
-<h2>CreateNewCompany</h2>
+<h2>Create New Company</h2>
 
 @using (Html.BeginForm("CreateNewCompany", "Company", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
     @Html.EditorForModel()
-    <input type="submit" />    
+    <input type="submit" title="Create"  />    
     //or this way:
     // @Html.TextBoxFor(m => m.Name, new { @class = "rndClass"})             
 }
