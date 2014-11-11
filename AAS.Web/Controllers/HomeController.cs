@@ -33,9 +33,19 @@ namespace AAS.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var userCompanies = this.Data.Companies.All().Where(c => c.OwnerId == userAsOwner.Id).ToList();
+            var userCompaniesAsList = this.Data.Companies.All().Where(c => c.OwnerId == userAsOwner.Id).ToList();
+            //ViewData["myCompanies"] = userCompanies;
 
-            return View(userCompanies);
+            List<SelectListItem> li = new List<SelectListItem>();
+
+            foreach (var company in userCompaniesAsList)
+            {
+                li.Add(new SelectListItem { Text = company.Name, Value = company.Id.ToString() });
+            }
+
+            ViewData["country"] = li;
+
+            return View(userCompaniesAsList);
         }
 
         public ActionResult Companies()

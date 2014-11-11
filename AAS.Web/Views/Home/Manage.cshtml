@@ -2,9 +2,19 @@
 @{
     ViewBag.Title = "Manage";
 }
+
+@Html.Partial("_PageHeader")
+
 <h2>@ViewBag.Title.</h2>
 
-@foreach (var item in Model)
-{
-    <h3>@item.Name</h3>
+@Html.DropDownList("myCompanies", ViewData["country"] as List<SelectListItem>)
+<button class="btn btn-default" id="mng">Manage</button>
+
+@section Scripts{
+    <script type="text/javascript">
+        $("#mng").on('click', function () {
+            var url = '../Company/ManageMyCompany/' + $("#myCompanies").val();
+            window.location = url;
+        });
+    </script>
 }
