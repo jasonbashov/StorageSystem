@@ -16,8 +16,15 @@ namespace AAS.Web
             routes.MapRoute( // here we register our routes
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "AAS.Web.Controllers" }
             );
+
+            //routes.MapRoute(
+            //    name: "StaticPages",
+            //    url: "action",
+            //    defaults: new { controller = "Home"}
+            //    );
         }
     }
 }
