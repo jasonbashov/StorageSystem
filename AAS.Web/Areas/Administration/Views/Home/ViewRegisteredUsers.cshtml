@@ -1,0 +1,22 @@
+﻿@using AAS.Web.Areas.Administration.Models
+@model IList<UsersViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+@(Html.Kendo()
+          .Grid<UsersViewModel>(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(u => u.Id);
+          columns.Bound(u => u.UserName);
+          //columns.Bound(u => u.Roles);
+      })
+      .Sortable()
+      .Pageable()
+      .Filterable()
+      .Groupable())

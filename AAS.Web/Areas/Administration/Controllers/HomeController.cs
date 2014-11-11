@@ -1,17 +1,29 @@
 ﻿namespace AAS.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
-    public class HomeController : Controller
+    using AutoMapper.QueryableExtensions;
+
+    using AAS.Web.Controllers;
+    using AAS.Web.Areas.Administration.Models;
+
+    public class HomeController : AdminController
     {
         // GET: Administration/Home
         public ActionResult Index()
         {
-            return View();
+            var users = this.Data.Users.All().ToList();
+            
+
+            return View(users);
+        }
+
+        public ActionResult ViewRegisteredUsers()
+        {
+            var users = this.Data.Users.All().AsQueryable().Project().To<UsersViewModel>().ToList();
+
+            return View(users);
         }
     }
 }

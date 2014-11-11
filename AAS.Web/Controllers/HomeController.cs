@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AAS.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -20,11 +20,22 @@ namespace AAS.Web.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        [Authorize]
+        public ActionResult Manage()
         {
-            ViewBag.Message = "Your contact page.";
+            var userId = this.CurrentUser.Id;
 
-            return View();
+            var userAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == userId);
+
+            if (userAsOwner == null)
+            {
+                TempData["Error"] = "You are not an owner";
+                return RedirectToAction("Index");
+            }
+
+            var userCompanies = this.Data.Companies.All().Where(c => c.OwnerId == userAsOwner.Id).ToList();
+
+            return View(userCompanies);
         }
 
         public ActionResult Companies()
