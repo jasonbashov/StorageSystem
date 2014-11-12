@@ -1,0 +1,20 @@
+﻿@using AAS.Web.Areas.CompanyManagment.Models
+@model IList<StockViewModel>
+
+<h2>View My Stocks from AREA</h2>
+
+@(Html.Kendo()
+              .Grid<StockViewModel>(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(u => u.Id);
+          columns.Bound(u => u.Name);
+          columns.Bound(u => u.Price);
+          columns.Bound(u => u.Quantity);
+      })
+      .Sortable()
+      .Pageable()
+      .Filterable()
+      .Groupable())
+

@@ -199,6 +199,10 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
     <Compile Include="Areas\Administration\Models\UsersViewModel.cs" />
+    <Compile Include="Areas\CompanyManagment\CompanyManagmentAreaRegistration.cs" />
+    <Compile Include="Areas\CompanyManagment\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\CompanyManagment\Controllers\StockController.cs" />
+    <Compile Include="Areas\CompanyManagment\Models\StockViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthorizeUserController.cs" />
@@ -226,7 +230,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.paper.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\background-img.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\paper_1024.jpg" />
     <Content Include="Content\kendo\Black\editor.png" />
     <Content Include="Content\kendo\Black\imagebrowser.png" />
     <Content Include="Content\kendo\Black\indeterminate.gif" />
@@ -455,6 +461,10 @@
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Home\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Home\ViewRegisteredUsers.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\web.config" />
+    <Content Include="Areas\CompanyManagment\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Stock\ViewMyStocks.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -517,7 +527,7 @@
     <Content Include="Views\Company\CreateNewCompany.cshtml" />
     <Content Include="Views\Company\ViewCompanyDetails.cshtml" />
     <Content Include="Views\Company\ViewMyCompanies.cshtml" />
-    <Content Include="Views\Company\ManageMyCompany.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Company\ManageMyCompany.cshtml" />
     <Content Include="Views\Stock\ViewMyStocks.cshtml" />
     <Content Include="Scripts\kendo\jquery.min.map" />
     <Content Include="Scripts\kendo\kendo.all.min.js.map" />
@@ -526,6 +536,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CompanyManagment\Views\Home\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthorizeUser\" />
     <Folder Include="Views\Base\" />

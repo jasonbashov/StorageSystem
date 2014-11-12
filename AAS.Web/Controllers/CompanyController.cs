@@ -148,7 +148,7 @@
         [HttpGet]
         public ActionResult ManageMyCompany(int id)
         {
-            return View();
+            return RedirectToRoute("~/CompanyManagment/Company/ManageMyCompany/" + id.ToString());
         }
     }
 }

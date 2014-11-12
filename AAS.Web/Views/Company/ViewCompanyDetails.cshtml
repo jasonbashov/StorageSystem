@@ -7,7 +7,7 @@
 
 @if (Model.Owner.UserId == ViewBag.UserId)
 {
-    @Html.ActionLink("Manage", "ManageMyCompany", "Company", new { id = Model.Id }, new { @class = "btn btn-default" });
+    @Html.ActionLink("Manage", "ManageMyCompany", "Company", new { area = "CompanyManagment", id = Model.Id }, new { @class = "btn btn-default" });
 }
 
 <div class="row">
