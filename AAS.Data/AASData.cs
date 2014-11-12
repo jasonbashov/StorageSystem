@@ -6,13 +6,14 @@
     
     using AAS.Data.Repositories;
     using AAS.Models;
+    using AAS.Contracts;
 
     public class AASData : IAASData
     {
-        private DbContext context;
+        private IAASDbContext context;
         private IDictionary<Type, object> repositories;
 
-        public AASData(DbContext context)
+        public AASData(IAASDbContext context)
         {
             this.context = context;
             this.repositories = new Dictionary<Type, object>();
@@ -54,7 +55,7 @@
         {
             get
             {
-                return this.GetRepository<Sale>();
+                return this.GetDeletableEntityRepository<Sale>();
             }
         }
 
@@ -62,7 +63,15 @@
         {
             get
             {
-                return this.GetRepository<Stock>();
+                return this.GetDeletableEntityRepository<Stock>();
+            }
+        }
+
+        public IAASDbContext Context
+        {
+            get
+            {
+                return this.context;
             }
         }
 
@@ -71,16 +80,42 @@
             return this.context.SaveChanges();
         }
 
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.context != null)
+                {
+                    this.context.Dispose();
+                }
+            }
+        }
+
         private IRepository<T> GetRepository<T>() where T : class
         {
-            var typeOfRepository = typeof(T);
-            if (!this.repositories.ContainsKey(typeOfRepository))
+            if (!this.repositories.ContainsKey(typeof(T)))
             {
-                var newRepository = Activator.CreateInstance(typeof(Repository<T>), context);
-                this.repositories.Add(typeOfRepository, newRepository);
+                var type = typeof(GenericRepository<T>);
+                this.repositories.Add(typeof(T), Activator.CreateInstance(type, this.context));
             }
 
-            return (IRepository<T>)this.repositories[typeOfRepository];
+            return (IRepository<T>)this.repositories[typeof(T)];
+        }
+
+        private IDeletableEntityRepository<T> GetDeletableEntityRepository<T>() where T : class, IDeletableEntity
+        {
+            if (!this.repositories.ContainsKey(typeof(T)))
+            {
+                var type = typeof(DeletableEntityRepository<T>);
+                this.repositories.Add(typeof(T), Activator.CreateInstance(type, this.context));
+            }
+
+            return (IDeletableEntityRepository<T>)this.repositories[typeof(T)];
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace AAS.Models
+﻿namespace AAS.Models
 {
-    public class Company
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    
+    using AAS.Contracts;
+
+    public class Company : DeletableEntity
     {
         private ICollection<Client> clients;
         private ICollection<Stock> stocks;
@@ -24,19 +23,19 @@ namespace AAS.Models
 
         [Required]
         public string Name { get; set; }
-        
+
         [Required]
         public int OwnerId { get; set; }
 
         public virtual Owner Owner { get; set; }
 
         public string Adress { get; set; }
-        
+
         [Required]
         public string Bulstrad { get; set; }
-                
+
         public string ImgUrl { get; set; }
-        
+
         public string AccountablePerson { get; set; }
 
         public virtual ICollection<Client> Clients

@@ -32,7 +32,8 @@
                 return RedirectToAction("Index", "Home", new { Area = "" });
             }
 
-            var companyStocks = currCompany.Stocks.AsQueryable().Project().To<StockViewModel>().ToList();
+            var companyStocks = this.Data.Stocks.All().Where(s => s.CompanyId == currCompany.Id)
+                .AsQueryable().Project().To<StockViewModel>().ToList();// currCompany.Stocks.AsQueryable().Project().To<StockViewModel>().ToList();
 
             return View(companyStocks);
         }

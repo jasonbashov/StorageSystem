@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AAS.Models
+﻿namespace AAS.Models
 {
-    public class Stock
+    using System.ComponentModel.DataAnnotations;
+
+    using AAS.Contracts;
+
+    public class Stock : DeletableEntity
     {
         [Key]
         public int Id { get; set; }

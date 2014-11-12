@@ -8,18 +8,18 @@
     {
         IQueryable<T> All();
 
-        T Find(object id);
+        T GetById(object id);
 
         void Add(T entity);
 
         void Update(T entity);
 
-        T Delete(T entity);
+        void Delete(T entity);
 
-        T Delete(object id);
+        void Delete(object id);
 
-        //void UpdateValues(Expression<Func<T, object>> entity);
+        void Detach(T entity);
 
-        int SaveChanges();
+        void UpdateValues(Expression<Func<T, object>> entity);
     }
 }

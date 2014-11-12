@@ -65,8 +65,10 @@ namespace AAS.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            //this thing done correctly?!?!
+            kernel.Bind<IAASDbContext>().To<ApplicationDbContext>();
             kernel.Bind<IAASData>().To<AASData>();
+            //this thing done correctly?!?!
+            //kernel.Bind<IAASData>().To<AASData>();
             //kernel.Bind<DbContext>().To<ApplicationDbContext>();
             //kernel.Bind<IReposutory<T>>().To < GenericRepository<T>();
         }        

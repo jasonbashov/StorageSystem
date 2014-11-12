@@ -16,12 +16,12 @@
         {
             get
             {
-                return this.Data.Users.Find(this.GetUserId());
+                return this.Data.Users.GetById(this.GetUserId());
             }
         }
 
         protected IAASData Data;
-
+        
         public BaseController()
             : this(new AASData(new ApplicationDbContext()))
         {

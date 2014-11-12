@@ -201,8 +201,11 @@
     <Compile Include="Areas\Administration\Models\UsersViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\CompanyManagmentAreaRegistration.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\CompanyManagment\Controllers\StockGridController.cs" />
+    <Compile Include="Areas\CompanyManagment\Controllers\KendoGridManageController.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\StockController.cs" />
     <Compile Include="Areas\CompanyManagment\Models\StockViewModel.cs" />
+    <Compile Include="Areas\CompanyManagment\Models\Base\CompanyManagmentViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthorizeUserController.cs" />
@@ -536,7 +539,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CompanyManagment\Views\Grid\" />
     <Folder Include="Areas\CompanyManagment\Views\Home\" />
+    <Folder Include="Areas\CompanyManagment\Views\KendoGridManage\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthorizeUser\" />
     <Folder Include="Views\Base\" />
@@ -550,6 +555,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AAS.Common\AAS.Common.csproj">
+      <Project>{c1811367-d5ab-4a14-a436-61efd488bfc8}</Project>
+      <Name>AAS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AAS.Contracts\AAS.Contracts.csproj">
+      <Project>{39b9b421-a8a6-49fa-aee6-580ca93e3f6c}</Project>
+      <Name>AAS.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AAS.Data\AAS.Data.csproj">
       <Project>{945BE354-5D36-4605-8327-92F7D3EE9B0A}</Project>
       <Name>AAS.Data</Name>

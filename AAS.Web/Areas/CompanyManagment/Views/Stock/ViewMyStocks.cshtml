@@ -1,20 +1,36 @@
 ﻿@using AAS.Web.Areas.CompanyManagment.Models
 @model IList<StockViewModel>
-
+@{
+    TempData["companyId"] = int.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+}
 <h2>View My Stocks from AREA</h2>
 
 @(Html.Kendo()
-              .Grid<StockViewModel>(Model)
+          .Grid<StockViewModel>(Model)
       .Name("Grid")
-      .Columns(columns =>
+      .Columns(cols =>
       {
-          columns.Bound(u => u.Id);
-          columns.Bound(u => u.Name);
-          columns.Bound(u => u.Price);
-          columns.Bound(u => u.Quantity);
+          cols.Bound(pr => pr.Id);
+          cols.Bound(pr => pr.Name);
+          cols.Bound(pr => pr.Price);
+          cols.Bound(pr => pr.Quantity);
+          cols.Bound(pr => pr.CreatedOn).Hidden();
+          cols.Bound(pr => pr.ModifiedOn).Hidden();
+          cols.Command(com => com.Edit()).Title("Промяна");
+          cols.Command(com => com.Destroy()).Title("Изтриване");
       })
-      .Sortable()
-      .Pageable()
-      .Filterable()
-      .Groupable())
-
+          .ColumnMenu()
+        .Pageable(page => page.Refresh(true))
+        .Sortable()
+        .Groupable()
+        .Filterable()
+        .Editable(edit => edit.Mode(GridEditMode.PopUp))
+        .ToolBar(toolbar => toolbar.Create())
+      .DataSource(data => data
+          .Ajax()
+                .Model(m => m.Id(adv => adv.Id))
+                .Read(read => read.Action("Read", "StockGrid"))
+                .Create(create => create.Action("Create", "StockGrid"))
+                .Update(update => update.Action("Update", "StockGrid"))
+                .Destroy(destroy => destroy.Action("Destroy", "StockGrid"))
+            ))

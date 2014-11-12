@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace AAS.Models
+﻿namespace AAS.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Client
     {
         private ICollection<Sale> sales;
@@ -22,10 +19,10 @@ namespace AAS.Models
         public string Name { get; set; }
 
         public string Adress { get; set; }
-        
+
         [Required]
         public string Bulstrad { get; set; }
-        
+
         [Required]
         public string UserId { get; set; }
 

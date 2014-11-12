@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
 
-    public class Sale
+    using AAS.Contracts;
+
+    public class Sale : DeletableEntity
     {
         private ICollection<Stock> stocks;
 

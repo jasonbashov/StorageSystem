@@ -18,6 +18,8 @@
 
         IRepository<Stock> Stocks { get; }
 
+        IAASDbContext Context { get; }
+
         int SaveChanges();
     }
 }
