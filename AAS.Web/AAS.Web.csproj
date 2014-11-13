@@ -472,6 +472,7 @@
     <Content Include="Areas\CompanyManagment\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Stock\ViewMyStocks.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Sale\ViewMySales.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Sale\SaleDetails.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

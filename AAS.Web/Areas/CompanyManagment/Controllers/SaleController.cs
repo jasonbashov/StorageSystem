@@ -33,5 +33,11 @@
 
             return View(companySales);
         }
+
+        public ActionResult SaleDetails(int id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
     }
 }
