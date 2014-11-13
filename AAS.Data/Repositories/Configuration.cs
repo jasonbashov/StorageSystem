@@ -58,7 +58,13 @@ namespace AAS.Data.Migrations
 
             for (int i = 1; i <= 20; i++)
             {
-                var testStock = new Stock() { Name = "testStock" + i.ToString(), Quantity = i * rand.Next(100), Price = i * rand.Next(1, 250) };
+                var testStock = new Stock()
+                {
+                    Name = "testStock" + i.ToString(),
+                    Quantity = i * rand.Next(100),
+                    Price = i * rand.Next(1, 250),
+                    
+                };
 
                 testCompany.Stocks.Add(testStock);
             }

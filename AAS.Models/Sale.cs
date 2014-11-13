@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using AAS.Contracts;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Sale : DeletableEntity
     {
@@ -13,7 +14,6 @@
         public Sale()
         {
             this.stocks = new HashSet<Stock>();
-
         }
 
         [Key]
@@ -34,7 +34,7 @@
         public int CompanyId { get; set; }
 
         public virtual Company Company { get; set; }
-
+        
         public virtual ICollection<Stock> Stocks
         {
             get

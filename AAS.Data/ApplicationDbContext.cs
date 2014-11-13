@@ -23,9 +23,9 @@
         {
             return new ApplicationDbContext();
         }
-        
+
         public IDbSet<Stock> Stocks { get; set; }
-        
+
         public DbContext DbContext
         {
             get
@@ -35,12 +35,14 @@
         }
 
         public IDbSet<Client> Clients { get; set; }
-        
+
         public IDbSet<Company> Companies { get; set; }
-        
+
         public IDbSet<Owner> Owners { get; set; }
-        
+
         public IDbSet<Sale> Sales { get; set; }
+
+        public IDbSet<SalesStocks> SalesStocks { get; set; }
 
         public override int SaveChanges()
         {
@@ -56,9 +58,22 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Sale>().HasMany(s => s.Stocks).WithMany(st => st.Sales).Map(
+            //    m =>
+            //    {
+            //        m.ToTable("SaleCourse");
+            //        m.MapLeftKey("SaleId");
+            //        m.MapRightKey("CourseId");
+            //    });
+            modelBuilder.Entity<Sale>()
+                .HasRequired(s => s.Stocks)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Conventions.Add(new IsUnicodeAttributeConvention());
 
             base.OnModelCreating(modelBuilder); // Without this call EntityFramework won't be able to configure the identity model
+
         }
 
         protected override void Dispose(bool disposing)
