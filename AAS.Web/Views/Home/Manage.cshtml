@@ -8,11 +8,11 @@
 <h2>@ViewBag.Title.</h2>
 <div class="jumbotron">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label for="companyDdl" class="control-label">Select company</label>
         </div>
-        <div class="col-md-5">
-            @Html.DropDownList("myCompanies", ViewData["country"] as List<SelectListItem>, new { id = "companyDdl" })
+        <div class="col-md-6">
+            @Html.DropDownList("myCompanies", ViewData["country"] as List<SelectListItem>, new { id = "companyDdl", @class = "form-control" })
             <button class="btn btn-default" id="mng">Manage</button>
         </div>
     </div>

@@ -1,21 +1,16 @@
 ﻿namespace AAS.Web.Areas.CompanyManagment.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
-    
-    using AAS.Web.Controllers;
-    using AAS.Web.Areas.CompanyManagment.Models;
 
-    public class StockController : AuthorizeUserController
+    using AAS.Web.Controllers;
+    using AAS.Web.Areas.CompanyManagment.Models.Sale;
+
+    public class SaleController : AuthorizeUserController
     {
-        // GET: CompanyManagment/Home
-        [HttpGet]
-        public ActionResult ViewMyStocks(int id)
+        public ActionResult ViewMySales(int id)
         {
             var currCompany = this.Data.Companies.All().FirstOrDefault(c => c.Id == id);
 
@@ -33,10 +28,10 @@
                 return RedirectToAction("Index", "Home", new { Area = "" });
             }
 
-            var companyStocks = this.Data.Stocks.All().Where(s => s.CompanyId == currCompany.Id)
-                .AsQueryable().Project().To<StockViewModel>().ToList();// currCompany.Stocks.AsQueryable().Project().To<StockViewModel>().ToList();
+            var companySales = this.Data.Sales.All().Where(s => s.CompanyId == currCompany.Id)
+                .AsQueryable().Project().To<SaleViewModel>().ToList();// currCompany.Stocks.AsQueryable().Project().To<StockViewModel>().ToList();
 
-            return View(companyStocks);
+            return View(companySales);
         }
     }
 }

@@ -8,7 +8,8 @@
                  new { id = @Url.RequestContext.RouteData.Values["id"] },
                  new { @class = "btn btn-default" })
 
-<a href="">View my sales</a>
-<a href="">Add new product</a>
-<a href="">Make new sale</a>
+@Html.ActionLink("View my sales", "ViewMySales", "Sale",
+                 new { id = @Url.RequestContext.RouteData.Values["id"] },
+                 new { @class = "btn btn-default" })
+
 

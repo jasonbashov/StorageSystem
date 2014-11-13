@@ -201,9 +201,12 @@
     <Compile Include="Areas\Administration\Models\UsersViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\CompanyManagmentAreaRegistration.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\CompanyManagment\Controllers\SaleController.cs" />
+    <Compile Include="Areas\CompanyManagment\Controllers\SaleGridController.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\StockGridController.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\KendoGridManageController.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\StockController.cs" />
+    <Compile Include="Areas\CompanyManagment\Models\Sale\SaleViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\Models\StockViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\Models\Base\CompanyManagmentViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -468,6 +471,7 @@
     <Content Include="Areas\CompanyManagment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Stock\ViewMyStocks.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Sale\ViewMySales.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -541,7 +545,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\CompanyManagment\Views\Grid\" />
     <Folder Include="Areas\CompanyManagment\Views\Home\" />
-    <Folder Include="Areas\CompanyManagment\Views\KendoGridManage\" />
+    <Folder Include="Areas\CompanyManagment\Views\SaleGrid\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthorizeUser\" />
     <Folder Include="Views\Base\" />

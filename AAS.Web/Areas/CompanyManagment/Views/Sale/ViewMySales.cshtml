@@ -1,0 +1,30 @@
+﻿@using AAS.Web.Areas.CompanyManagment.Models.Sale
+@model IList<SaleViewModel>
+
+<h2>View My Stocks from AREA</h2>
+
+@(Html.Kendo()
+              .Grid<SaleViewModel>(Model)
+      .Name("Grid")
+      .Columns(cols =>
+      {
+          cols.Bound(pr => pr.Id);
+          cols.Bound(pr => pr.DateOfSale);
+          cols.Bound(pr => pr.TotalCost);
+          cols.Bound(pr => pr).Title("Show Details").ClientTemplate(
+                     "<a href='" +
+                         Url.Action("SaleDetails", "Sale") +
+                         "/#= Id #'" +
+                     ">Show Product Details</a>");
+      })
+      .ColumnMenu()
+      .Pageable()
+      .Sortable()
+      .Groupable()
+      .Filterable()
+      .DataSource(data => data
+          .Ajax()
+                .Model(m => m.Id(adv => adv.Id))
+                    .Read(read => read.Action("Read", "SaleGrid"))
+                    ))
+@*@(TempData["maikaTi"] = TempData["companyId"])*@
