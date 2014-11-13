@@ -1,8 +1,10 @@
 ﻿@using AAS.Web.Areas.CompanyManagment.Models
 @model IList<StockViewModel>
 @{
-    TempData["companyId"] = int.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
+    TempData["cmpId"] = int.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
 }
+@*<input class="hidden" disabled="disabled" id="compId" value="@TempData["companyId"].ToString()" />*@
+@*@Html.Hidden("compIdHidden", TempData["companyId"]);*@
 <h2>View My Stocks from AREA</h2>
 
 @(Html.Kendo()
@@ -20,11 +22,11 @@
           cols.Command(com => com.Destroy()).Title("Изтриване");
       })
           .ColumnMenu()
-        .Pageable(page => page.Refresh(true))
+        .Pageable()
         .Sortable()
         .Groupable()
         .Filterable()
-        .Editable(edit => edit.Mode(GridEditMode.PopUp))
+        .Editable()
         .ToolBar(toolbar => toolbar.Create())
       .DataSource(data => data
           .Ajax()
@@ -34,3 +36,5 @@
                 .Update(update => update.Action("Update", "StockGrid"))
                 .Destroy(destroy => destroy.Action("Destroy", "StockGrid"))
             ))
+
+@*@(TempData["maikaTi"] = TempData["companyId"])*@

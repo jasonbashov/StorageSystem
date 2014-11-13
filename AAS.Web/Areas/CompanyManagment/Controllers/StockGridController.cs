@@ -34,8 +34,9 @@
 
         protected override IEnumerable GetData()
         {
-            var companyId = int.Parse(TempData["companyId"].ToString());
-            this.TempData["companyId"] = companyId;
+            var companyId = int.Parse(TempData["cmpId"].ToString());
+            this.TempData["cmpId"] = companyId;
+
             return this.Data.Stocks.All().Where(s => s.CompanyId == companyId).AsQueryable().Project().To<StockViewModel>();
         }
 
@@ -47,9 +48,14 @@
         [HttpPost]
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            var currCompanyId = this.TempData["companyId"];
+
+            model.CreatedOn = model.CreatedOn.ToLocalTime();
+
+            var currCompanyId = this.TempData["cmpId"];
             model.CompanyId = int.Parse(currCompanyId.ToString());
-            this.TempData["companyId"] = currCompanyId;
+            this.TempData["cmpId"] = currCompanyId;
+
+            //var createdOnNewCulture = model.CreatedOn.ToShortDateString();
             //var asd = this.Request.Params[3];
             //var companyId = ;// int.Parse(this.Url.RequestContext.RouteData.Values["id"].ToString());
             var dbModel = base.Create<Model>(model);

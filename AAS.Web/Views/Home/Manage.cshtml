@@ -6,14 +6,22 @@
 @Html.Partial("_PageHeader")
 
 <h2>@ViewBag.Title.</h2>
-
-@Html.DropDownList("myCompanies", ViewData["country"] as List<SelectListItem>)
-<button class="btn btn-default" id="mng">Manage</button>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="companyDdl" class="control-label">Select company</label>
+        </div>
+        <div class="col-md-5">
+            @Html.DropDownList("myCompanies", ViewData["country"] as List<SelectListItem>, new { id = "companyDdl" })
+            <button class="btn btn-default" id="mng">Manage</button>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script type="text/javascript">
         $("#mng").on('click', function () {
-            var url = '../CompanyManagment/Company/ManageMyCompany/' + $("#myCompanies").val();
+            var url = '../CompanyManagment/Company/ManageMyCompany/' + $("#companyDdl").val();
             window.location = url;
         });
     </script>
