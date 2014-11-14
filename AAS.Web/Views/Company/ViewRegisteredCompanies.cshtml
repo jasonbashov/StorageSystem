@@ -2,36 +2,6 @@
 
 <h2>Registered companies</h2>
 
-@*<table class="table table-striped table-hover ">
-        <thead>
-            <tr>
-                <th>Column heading</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var company in Model)
-            {
-                <tr>
-                    <td>@company.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
-@*@for (int i = 0; i < Model.Count; i++)
-    {
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <p class="panel-title">
-                        @Html.ActionLink(Model[i].Name, "ViewCompanyDetails", "Company", null, new object{ id = Model[i].Id.ToString() })
-                    </p>
-                </div>
-                <div class="panel-body">
-                    HERE COME THE IMG
-                </div>
-            </div>
-        </div>
-    }*@
 <div class="row">
     <div id="container">
         @foreach (var company in Model)
@@ -44,9 +14,7 @@
                         </p>
                     </div>
                     <div class="panel-body text-center">
-                        @*<a href="@Url.HttpRouteUrl("http://localhost:25128/Company/ViewCompanyDetails", @company.Id)"><img src="@company.ImgUrl" alt="company img" width="150" height="200" /></a>*@
                         <a href="@Url.Action("ViewCompanyDetails", "Company", new { id = @company.Id })"><img src="@company.ImgUrl" alt="company img" width="150" height="200" /></a>
-                        @*<a href="http://localhost:25128/Company/ViewCompanyDetails/@company.Id"><img src="@company.ImgUrl" alt="company img" width="150" height="200" /></a>*@
                     </div>
                 </div>
             </div>
@@ -56,21 +24,13 @@
 <div class="row">
     <ul class="pager">
         <li>
-            @Html.ActionLink("Previous",
-                        "ViewRegisteredCompanies",
-                        new
-                        {
-                            id = (int.Parse(@Url.RequestContext.RouteData.Values["id"].ToString()) - 1)
-                        })
+            @Html.ActionLink("Previous", "ViewRegisteredCompanies",
+                        new { id = (int.Parse(@Url.RequestContext.RouteData.Values["id"].ToString()) - 1) })
 
         </li>
         <li>
-            @Html.ActionLink("Next",
-                        "ViewRegisteredCompanies",
-                        new
-                        {
-                            id = (int.Parse(@Url.RequestContext.RouteData.Values["id"].ToString()) + 1)
-                        })
+            @Html.ActionLink("Next", "ViewRegisteredCompanies",
+                        new { id = (int.Parse(@Url.RequestContext.RouteData.Values["id"].ToString()) + 1) })
         </li>
     </ul>
 </div>

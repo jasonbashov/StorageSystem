@@ -3,8 +3,7 @@
 @{
     TempData["cmpId"] = int.Parse(Url.RequestContext.RouteData.Values["id"].ToString());
 }
-@*<input class="hidden" disabled="disabled" id="compId" value="@TempData["companyId"].ToString()" />*@
-@*@Html.Hidden("compIdHidden", TempData["companyId"]);*@
+
 <h2>View My Stocks from AREA</h2>
 
 @(Html.Kendo()
@@ -36,5 +35,3 @@
                 .Update(update => update.Action("Update", "StockGrid"))
                 .Destroy(destroy => destroy.Action("Destroy", "StockGrid"))
             ))
-
-@*@(TempData["maikaTi"] = TempData["companyId"])*@

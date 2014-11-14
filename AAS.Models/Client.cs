@@ -5,11 +5,11 @@
 
     public class Client
     {
-        private ICollection<Sale> sales;
+        private ICollection<Company> companies;
 
         public Client()
         {
-            this.sales = new HashSet<Sale>();
+            this.companies = new HashSet<Company>();
         }
 
         [Key]
@@ -28,16 +28,16 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Sale> Sales
+        public virtual ICollection<Company> Companies
         {
             get
             {
-                return this.sales;
+                return this.companies;
             }
 
             set
             {
-                this.sales = value;
+                this.companies = value;
             }
         }
 
