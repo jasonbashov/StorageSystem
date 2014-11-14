@@ -59,7 +59,7 @@
     <Compile Include="Owner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs" />
-    <Compile Include="SalesStocks.cs" />
+    <Compile Include="SoldStock.cs" />
     <Compile Include="Stock.cs" />
   </ItemGroup>
   <ItemGroup>

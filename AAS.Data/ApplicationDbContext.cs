@@ -18,7 +18,6 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -42,7 +41,7 @@
 
         public IDbSet<Sale> Sales { get; set; }
 
-        public IDbSet<SalesStocks> SalesStocks { get; set; }
+        public IDbSet<SoldStock> SoldStocks { get; set; }
 
         public override int SaveChanges()
         {
@@ -58,6 +57,7 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //In case I return many-to-many relation with stocks and sales uncomment theses
             //modelBuilder.Entity<Sale>().HasMany(s => s.Stocks).WithMany(st => st.Sales).Map(
             //    m =>
             //    {
@@ -65,10 +65,10 @@
             //        m.MapLeftKey("SaleId");
             //        m.MapRightKey("CourseId");
             //    });
-            modelBuilder.Entity<Sale>()
-                .HasRequired(s => s.Stocks)
-                .WithMany()
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Sale>()
+            //    .HasRequired(s => s.SoldStocks)
+            //    .WithMany()
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Conventions.Add(new IsUnicodeAttributeConvention());
 
