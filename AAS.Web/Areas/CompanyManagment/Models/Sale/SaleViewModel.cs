@@ -25,5 +25,8 @@
         
         [Required]
         public int CompanyId { get; set; }
+
+        public virtual ICollection<SoldStockViewModel> SoldStocks {get; set; }
+        
     }
 }

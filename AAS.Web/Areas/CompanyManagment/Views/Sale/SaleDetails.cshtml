@@ -1,8 +1,27 @@
-﻿
+﻿@model AAS.Web.Areas.CompanyManagment.Models.Sale.SaleViewModel
 @{
-    ViewBag.Title = "SaleDetails";
+    ViewBag.Title = "Sale Details";
 }
 
-<h2>SaleDetails</h2>
+<h2>@ViewBag.Title</h2>
 
-@ViewBag.Id
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sale Id: @Model.Id</h3>
+    </div>
+    <div class="panel-body">
+        <strong>Date of current sale:</strong> @Model.DateOfSale
+        <br />
+        <div class="jumbotron">
+            @foreach (var soldStock in Model.SoldStocks)
+            {
+                <strong>Stock Name: </strong>@soldStock.Name
+                <strong> | Single Unit Price: </strong>@soldStock.SingleUnitPrice
+                <strong> | Quantity Sold: </strong>@soldStock.QuantitySold
+                <strong> | Total: </strong>@soldStock.SumPrice
+                <br />
+            }
+            <strong>Sale's Total Cost: </strong> @Model.TotalCost
+        </div>
+    </div>
+</div>

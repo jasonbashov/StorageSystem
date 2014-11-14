@@ -206,6 +206,7 @@
     <Compile Include="Areas\CompanyManagment\Controllers\StockGridController.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\KendoGridManageController.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\StockController.cs" />
+    <Compile Include="Areas\CompanyManagment\Models\Sale\SoldStockViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\Models\Sale\SaleViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\Models\StockViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\Models\Base\CompanyManagmentViewModel.cs" />

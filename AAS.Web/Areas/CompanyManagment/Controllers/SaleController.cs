@@ -7,6 +7,7 @@
 
     using AAS.Web.Controllers;
     using AAS.Web.Areas.CompanyManagment.Models.Sale;
+    using AutoMapper;
 
     public class SaleController : AuthorizeUserController
     {
@@ -36,8 +37,25 @@
 
         public ActionResult SaleDetails(int id)
         {
-            ViewBag.Id = id;
-            return View();
+            var sale = this.Data.Sales.All().AsQueryable().Project().To<SaleViewModel>().FirstOrDefault(s => s.Id == id);
+
+            if (sale == null)
+            {
+                TempData["Error"] = "No such sale";
+
+                return RedirectToAction("Index", "Home", new { Area = "" });
+            }
+
+            var company = this.Data.Companies.All().FirstOrDefault(c => c.Id == sale.CompanyId);
+
+            if (this.CurrentUser.Id != company.Owner.UserId)
+            {
+                TempData["Error"] = "You are not the owner of this company";
+
+                return RedirectToAction("Index", "Home", new { Area = "" });
+            }
+
+            return View(sale);
         }
     }
 }
