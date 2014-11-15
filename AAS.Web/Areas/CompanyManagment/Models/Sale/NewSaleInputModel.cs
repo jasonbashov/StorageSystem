@@ -10,6 +10,7 @@
     public class NewSaleInputModel : IMapFrom<Sale>
     {
         [Required]
+        [Display(Name = "Date")]
         public DateTime DateOfSale { get; set; }
 
         [Required]

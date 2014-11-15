@@ -9,6 +9,7 @@
         HttpMethod = "POST"
     }))
     {
+        @Html.AntiForgeryToken()
         <input type="text" name="query" />
         <input type="submit" />
     }

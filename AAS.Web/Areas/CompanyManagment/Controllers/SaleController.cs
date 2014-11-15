@@ -112,6 +112,43 @@
 
             return RedirectToAction("Index", "Home", new { Area = String.Empty });
         }
+        
+        [HttpGet]
+        public ActionResult CreateNewClient()
+        {
+            return PartialView("_CreateNewClient");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNewClient(ClientInputModel inputClient)
+        {
+            if (!ModelState.IsValid || inputClient == null)
+            {
+                return PartialView("_CreateNewClient", inputClient);
+            }
+
+            var newClient = new Client()
+            {
+                Name = inputClient.Name,
+                Adress = inputClient.Adress,
+                Bulstrad = inputClient.Bulstrad
+            };
+
+            this.Data.Clients.Add(newClient);
+            this.Data.SaveChanges();
+
+            var dbClient = this.Data.Clients.All().FirstOrDefault(c => c.Bulstrad == inputClient.Bulstrad);
+
+            var result = new NewSaleInputModel()
+            {
+                ClientBulstrad = dbClient.Bulstrad,
+                ClientName = dbClient.Name,
+                ClientId = dbClient.Id
+            };
+ 
+            return PartialView("_ClientsResult", result);
+        }
 
         public ActionResult Search(string query)
         {
@@ -130,6 +167,7 @@
             return this.PartialView("_ClientsResult", result);
         }
 
+        [HttpGet]
         public ActionResult ChooseFromDropdown(int id)
         {
             var clients = this.Data.Companies.All().FirstOrDefault(c => c.Id == id).Clients.ToList();

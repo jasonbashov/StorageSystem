@@ -2,28 +2,29 @@
 
 <h2>Make New Sale for Company @Model.CompanyName</h2>
 
-@using (Html.BeginForm("CreateNewSale", "Sale", FormMethod.Post,
+<div class="jumbotron">
+    @using (Html.BeginForm("CreateNewSale", "Sale", FormMethod.Post,
                        new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
 
-    <fieldset>
+        <fieldset>
 
-        <legend>Create New Sale</legend>
+            <legend>Create New Sale</legend>
 
-        <div class="form-group">
-            @Html.LabelFor(m => Model.DateOfSale, new { @class = "col-md-1 control-label" })
-            @(Html.Kendo().DateTimePickerFor(m => Model.DateOfSale)
+            <div class="form-group">
+                @Html.LabelFor(m => Model.DateOfSale, new { @class = "col-md-1 control-label" })
+                @(Html.Kendo().DateTimePickerFor(m => Model.DateOfSale)
               .Name("DateOfSale")
                   .Value(DateTime.Now)
-                  .HtmlAttributes(new { required = "required" }))
-        </div>
-        <div class="form-group">
-            <strong class="col-md-1 control-label">Client</strong>
-            <div id="clientDdl"></div>
-            <div id="clientDdlLoading" style="display: none">Loading...</div>
-            @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Sale",
+                  .HtmlAttributes(new { required = "required", @class = "col-md-6 form-control" }))
+            </div>
+            <div class="form-group">
+                <strong class="col-md-1 control-label">Client</strong>
+                <div id="clientDdl"></div>
+                <div id="clientDdlLoading" style="display: none">Loading...</div>
+                @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -39,7 +40,7 @@
                                  // Confirm = "Are you sure you want to update the time?"
                              }, new { @class = "btn btn-primary", id = "clientDdlBtn" })
 
-            @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
+                @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -55,7 +56,7 @@
                                  // Confirm = "Are you sure you want to update the time?"
                              }, new { @class = "btn btn-primary", id = "clientSearchBtn" })
 
-            @Ajax.ActionLink("Create New", "CreateNewClient", "Sale",
+                @Ajax.ActionLink("Create New", "CreateNewClient", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -70,25 +71,17 @@
                                  // AllowCache = true,
                                  // Confirm = "Are you sure you want to update the time?"
                              }, new { @class = "btn btn-success", id = "clientCreateBtn" })
-        </div>
-        @*@Html.LabelFor(m => Model.)
-            @Html.TextBoxFor(m => Model.Adress)
+            </div>
             <br />
-            @Html.LabelFor(m => Model.Bulstrad)
-            @Html.TextBoxFor(m => Model.Bulstrad)
-            <br />
-            @Html.LabelFor(m => Model.AccountablePerson)
-            @Html.TextBoxFor(m => Model.AccountablePerson)
-            <br />
-            @Html.LabelFor(m => Model.ImgUrl)
-            @Html.TextBoxFor(m => Model.ImgUrl)*@
-        <br />
-    </fieldset>
-    <input type="submit" value="Create" />
-}
-<div id="clientSearchForm"></div>
+        </fieldset>
+        <input type="submit" value="Create" class="btn btn-success" />
+    }
+</div>
+<div id="clientSearchForm" class="row"></div>
 
-<button id="chooseOther" hidden="hidden" class="btn btn-danger">Choose Other Option</button>
+<div class="row">
+    <button id="chooseOther" hidden="hidden" class="btn btn-danger">Choose Other Option</button>
+</div>
 
 <style scoped>
     .k-datetimepicker
@@ -123,6 +116,7 @@
             $('#clientsDdl').hide();
             $('#searchFormWrapper').hide();
             $('#chooseOther').hide();
+            $('#createClientWrapper').hide();
         });
     }
     function OnAjaxRequestFailure(request, error) {

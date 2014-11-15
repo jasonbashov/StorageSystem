@@ -480,6 +480,7 @@
     <Content Include="Areas\CompanyManagment\Views\Shared\_ClientDdl.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_ClientSearchForm.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_ClientsResult.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Shared\_CreateNewClient.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

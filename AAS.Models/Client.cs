@@ -23,7 +23,6 @@
         [Required]
         public string Bulstrad { get; set; }
 
-        [Required]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
@@ -40,7 +39,5 @@
                 this.companies = value;
             }
         }
-
-
     }
 }
