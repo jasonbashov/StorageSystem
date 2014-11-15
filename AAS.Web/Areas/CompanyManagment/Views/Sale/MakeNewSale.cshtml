@@ -3,9 +3,34 @@
 <h2>Make New Sale for Company @Model.CompanyName</h2>
 
 <div class="jumbotron">
-    @using (Html.BeginForm("CreateNewSale", "Sale", FormMethod.Post,
-                       new { @class = "form-horizontal", role = "form" }))
+    @using (Ajax.BeginForm("AddNewStocks", "Stock", new
+        {
+            id = Model.CompanyId
+        },
+        new AjaxOptions
+        {
+            UpdateTargetId = "stocksContainer",
+            HttpMethod = "Get",
+            InsertionMode = InsertionMode.Replace,
+            OnSuccess = "stillThinkingWhatToDo"
+        }))
     {
+        <p>Enter how many types of stocks to sell between 1 and 10</p>
+        <input type="number" min="1" max="10" value="1" name="count" class="form-control" />
+        <br />
+        <input type="submit" value="Add" class="btn btn-default" />
+    }
+
+    @using (Html.BeginForm("CreateNewSale", "Sale", new
+                           {
+                               id = Model.CompanyId
+                           }, FormMethod.Post, new
+                           {
+                               @class = "form-horizontal",
+                               role = "form"
+                           }))
+    {
+        
         @Html.AntiForgeryToken()
         @Html.ValidationSummary()
 
@@ -32,12 +57,7 @@
                                  LoadingElementId = "clientDdlLoading",
                                  HttpMethod = "GET",
                                  InsertionMode = InsertionMode.Replace,
-                                 //OnBegin = "OnAjaxRequestBeginFromDdl",
-                                 //OnFailure = "OnAjaxRequestFailure",
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
-                                 //OnComplete = "OnAjaxRequestComplete",
-                                 // AllowCache = true,
-                                 // Confirm = "Are you sure you want to update the time?"
                              }, new { @class = "btn btn-primary", id = "clientDdlBtn" })
 
                 @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
@@ -48,12 +68,7 @@
                                  LoadingElementId = "clientDdlLoading",
                                  HttpMethod = "GET",
                                  InsertionMode = InsertionMode.Replace,
-                                 //OnBegin = "OnAjaxRequestBeginFromDdl",
-                                 //OnFailure = "OnAjaxRequestFailure",
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
-                                 //OnComplete = "OnAjaxRequestComplete",
-                                 // AllowCache = true,
-                                 // Confirm = "Are you sure you want to update the time?"
                              }, new { @class = "btn btn-primary", id = "clientSearchBtn" })
 
                 @Ajax.ActionLink("Create New", "CreateNewClient", "Sale",
@@ -64,45 +79,44 @@
                                  LoadingElementId = "clientDdlLoading",
                                  HttpMethod = "GET",
                                  InsertionMode = InsertionMode.Replace,
-                                 //OnBegin = "OnAjaxRequestBeginFromDdl",
-                                 //OnFailure = "OnAjaxRequestFailure",
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
-                                 //OnComplete = "OnAjaxRequestComplete",
-                                 // AllowCache = true,
-                                 // Confirm = "Are you sure you want to update the time?"
                              }, new { @class = "btn btn-success", id = "clientCreateBtn" })
+            </div>
+            <div class="form-group">
+                <strong class="col-md-1 control-label">Stocks</strong>
+                <div id="stocksContainer"></div>
+                @*@Ajax.ActionLink("Add new Stock", "AddNewStock", "Stock",
+                    new { id = Model.CompanyId },
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "addNewStockContainer",
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        OnSuccess = "OnAjaxRequestSuccessFromAddNewStockBtn",
+                    }, new { @class = "btn btn-primary", id = "newStockBtn" })*@
             </div>
             <br />
         </fieldset>
         <input type="submit" value="Create" class="btn btn-success" />
     }
 </div>
+
 <div id="clientSearchForm" class="row"></div>
+
+<div class="row" id="addNewStockContainer"></div>
 
 <div class="row">
     <button id="chooseOther" hidden="hidden" class="btn btn-danger">Choose Other Option</button>
 </div>
 
-<style scoped>
-    .k-datetimepicker
-    {
-        width: 200px;
-    }
-    #to-do {
-        height: 52px;
-        width: 221px;
-        margin: 30px auto;
-        padding: 91px 0 0 188px;
-        background: url('@Url.Content("~/content/web/datepicker/todo.png")') transparent no-repeat 0 0;
-    }
-</style>
+
 
 <script type="text/javascript">
     (function onPAgeLoad() {
         $('#chooseOther').hide();
     })()
-    function OnAjaxRequestBegin() {
-        console.log("This is the OnBegin Callback");
+    function OnAjaxRequestSuccessFromAddNewStockBtn() {
+
     }
     function OnAjaxRequestSuccessFromDdl(data) {
         $('#clientDdlBtn').hide();

@@ -10,6 +10,7 @@
     
     using AAS.Web.Controllers;
     using AAS.Web.Areas.CompanyManagment.Models;
+    using AAS.Web.Areas.CompanyManagment.Models.Sale;
 
     public class StockController : AuthorizeUserController
     {
@@ -38,5 +39,45 @@
 
             return View(companyStocks);
         }
+
+        [HttpGet]
+        public ActionResult AddNewStocks(int id, int count)
+        {
+            var stocks = this.Data.Stocks.All()
+                .Where(s => s.CompanyId == id && s.Quantity > 0).AsQueryable()
+                .Project().To<StockViewModel>();
+
+            List<SelectListItem> li = new List<SelectListItem>();
+
+            ViewBag.StocksCount = count;
+
+            foreach (var stock in stocks)
+            {
+                li.Add(new SelectListItem { Text = stock.Name, Value = stock.Id.ToString() });
+            }
+
+            ViewData["stockDdl"] = li;
+
+            return PartialView("_StocksForm");
+        }
+
+        //[HttpPost]
+        //public ActionResult ChooseStock(StockViewModel choosenStock)
+        //{
+        //    var soldStock = new SoldStockViewModel()
+        //    {
+        //        Name = choosenStock.Name,
+        //        SingleUnitPrice = choosenStock.Price,
+        //        CompanyId = choosenStock.CompanyId
+        //    };
+
+        //    var newSaleInputModel = new NewSaleInputModel();
+        //    newSaleInputModel.SoldStocks = new List<SoldStockViewModel>();
+
+        //    newSaleInputModel.SoldStocks.Add(soldStock);
+
+
+        //    return PartialView("_StockResult", newSaleInputModel);
+        //}
     }
 }

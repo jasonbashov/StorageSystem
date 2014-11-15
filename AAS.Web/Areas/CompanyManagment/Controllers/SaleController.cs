@@ -1,17 +1,18 @@
 ﻿namespace AAS.Web.Areas.CompanyManagment.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-
+    
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using AAS.Web.Controllers;
-    using AAS.Web.Areas.CompanyManagment.Models.Sale;
-    using AutoMapper;
     using AAS.Models;
-    using System.Collections.Generic;
+    using AAS.Web.Areas.CompanyManagment.Models;
     using AAS.Web.Areas.CompanyManagment.Models.Client;
+    using AAS.Web.Areas.CompanyManagment.Models.Sale;
 
     public class SaleController : AuthorizeUserController
     {
@@ -98,17 +99,73 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateNewSale(NewSaleInputModel newSale)
+        public ActionResult CreateNewSale(int id, NewSaleInputModel newSale)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(newSale);
-            //}
-            var asd = newSale;
+            if (!ModelState.IsValid)
+            {
+                return View("MakeNewSale", newSale);
+            }
 
+            var companyStocks = this.Data.Stocks.All().Where(s => s.CompanyId == id).ToList();
+
+            var totalCostOfTheSale = 0.0;
+            var soldStocks = newSale.SoldStocks;
+            var soldStocksList = new List<SoldStock>();
+
+            foreach (var stock in soldStocks)
+            {
+                var currStock = companyStocks.First(c => c.Id == stock.Id);
+                if (currStock.Quantity >= stock.QuantitySold)
+                {
+                    currStock.Quantity -= stock.QuantitySold;
+                    totalCostOfTheSale += stock.QuantitySold * currStock.Price;
+
+                    var soldStock = new SoldStock()
+                    {
+                        CompanyId = id,
+                        Name = currStock.Name,
+                        QuantitySold = stock.QuantitySold,
+                        SingleUnitPrice = currStock.Price,
+                        SumPrice = ((decimal)currStock.Price * stock.QuantitySold)
+                    };
+
+                    soldStocksList.Add(soldStock);
+                    this.Data.Stocks.Update(currStock);
+                }
+                else
+                {
+                    TempData["Error"] = "There are not enough quanityt of the stock " + currStock.Name;
+                    return View("MakeNewSale");
+                }
+            }
+
+            var currCompany = this.Data.Companies.All().FirstOrDefault(c => c.Id == id);
+            var currClient = this.Data.Clients.All().FirstOrDefault(c => c.Bulstrad == newSale.ClientBulstrad);
+            //var companyClient = currCompany.Clients.Contains(currClient);
+
+            if (!currCompany.Clients.Contains(currClient))
+            {
+                currCompany.Clients.Add(currClient);
+                this.Data.SaveChanges(); // this may be unnessecery
+            }
+
+            this.Data.Companies.Update(currCompany);
+
+            var sale = new Sale()
+            {
+                ClientId = currClient.Id,
+                CompanyId = id,
+                DateOfSale = newSale.DateOfSale,
+                SoldStocks = soldStocksList,
+                TotalCost = (decimal)totalCostOfTheSale
+            };
+
+            this.Data.Sales.Add(sale);
+            this.Data.SaveChanges();
             System.Console.WriteLine();
 
             //TempData["Success"] = "Company created successfuly";
+            //TODO: redirect to "faktura" page
 
             return RedirectToAction("Index", "Home", new { Area = String.Empty });
         }
@@ -189,5 +246,6 @@
         {
             return PartialView("_ClientSearchForm");
         }
+
     }
 }

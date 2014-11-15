@@ -27,7 +27,7 @@
         public int CompanyId { get; set; }
 
         public string CompanyName { get; set; }
-
-        public virtual ICollection<SoldStockViewModel> SoldStocks { get; set; }
+        
+        public virtual ICollection<StockViewModel> SoldStocks { get; set; }
     }
 }

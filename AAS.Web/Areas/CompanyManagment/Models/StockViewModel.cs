@@ -11,6 +11,7 @@
         [HiddenInput(DisplayValue = false)]
         public int? Id { get; set; }
 
+        [Display(Name="Stock Name")]
         public string Name { get; set; }
 
         public int Quantity { get; set; }
@@ -18,5 +19,9 @@
         public double Price { get; set; }
 
         public int CompanyId { get; set; }
+        
+        [Required]
+        [Display(Name="Quantity Sold")]
+        public int QuantitySold { get; set; }
     }
 }

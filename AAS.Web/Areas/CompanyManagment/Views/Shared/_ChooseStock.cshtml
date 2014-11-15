@@ -1,0 +1,21 @@
+﻿@*@using AAS.Web.Areas.CompanyManagment.Models
+@model StockViewModel
+
+<div id="createClientWrapper" class="jumbotron">
+    @using (Ajax.BeginForm("ChooseStock", null ,
+    new AjaxOptions
+    {
+        UpdateTargetId = "stocksContainer",
+        InsertionMode = InsertionMode.InsertBefore,
+        HttpMethod = "POST"
+    }, new { @class = "form-horizontal", role = "form" }))
+    {
+        <fieldset>
+            <legend>Add Stock</legend>
+            <div class="form-group">
+                @Html.DropDownListFor(m => Model.Id, ViewData["stockDdl"] as List<SelectListItem>, new { id = "clientsDdl", @class = "form-control" })
+            </div>
+        </fieldset>
+        <input type="submit" value="Add Stock to Sale" class="btn btn-success" />
+    }
+</div>*@
