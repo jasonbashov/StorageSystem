@@ -1,5 +1,6 @@
 ﻿namespace AAS.Web.Areas.CompanyManagment.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -108,7 +109,7 @@
 
             //TempData["Success"] = "Company created successfuly";
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { Area = String.Empty });
         }
 
         public ActionResult Search(string query)
@@ -133,7 +134,7 @@
 
             ViewData["clientDdl"] = li;
 
-            return this.PartialView("_ClientDdl", clients);
+            return this.PartialView("_ClientDdl");
         }
     }
 }

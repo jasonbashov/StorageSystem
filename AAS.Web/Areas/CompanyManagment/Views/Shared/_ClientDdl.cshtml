@@ -1,1 +1,3 @@
-﻿@Html.DropDownList("myClientsDdl", ViewData["clientDdl"] as List<SelectListItem>, new { id = "clientsDdl", @class = "form-control" })
+﻿@model AAS.Web.Areas.CompanyManagment.Models.Sale.NewSaleInputModel
+
+@Html.DropDownListFor(m => Model.ClientId, ViewData["clientDdl"] as List<SelectListItem>, new { id = "clientsDdl", @class = "form-control" })

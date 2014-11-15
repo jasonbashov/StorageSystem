@@ -20,9 +20,10 @@
                   .HtmlAttributes(new { required = "required" }))
         </div>
         <div class="form-group">
+            <strong class="col-md-1 control-label">Client</strong>
             <div id="clientDdl"></div>
             <div id="clientDdlLoading" style="display: none">Loading...</div>
-            @Ajax.ActionLink("Choose From Dropdown", "ChooseFromDropdown", "Sale",
+            @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -30,14 +31,29 @@
                                  LoadingElementId = "clientDdlLoading",
                                  HttpMethod = "GET",
                                  InsertionMode = InsertionMode.Replace,
-                                 //OnBegin = "OnAjaxRequestBegin",
+                                 //OnBegin = "OnAjaxRequestBeginFromDdl",
                                  //OnFailure = "OnAjaxRequestFailure",
-                                 //OnSuccess = "OnAjaxRequestSuccess",
+                                 OnSuccess = "OnAjaxRequestSuccessFromDdl",
                                  //OnComplete = "OnAjaxRequestComplete",
                                  // AllowCache = true,
                                  // Confirm = "Are you sure you want to update the time?"
-                             }, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Search By Bulstrad", "", "Sale", new { @class = "btn btn-default" })
+                             }, new { @class = "btn btn-primary", id = "clientDdlBtn" })
+
+            @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
+                             new { id = Model.CompanyId },
+                             new AjaxOptions
+                             {
+                                 UpdateTargetId = "clientDdl",
+                                 LoadingElementId = "clientDdlLoading",
+                                 HttpMethod = "GET",
+                                 InsertionMode = InsertionMode.Replace,
+                                 //OnBegin = "OnAjaxRequestBeginFromDdl",
+                                 //OnFailure = "OnAjaxRequestFailure",
+                                 OnSuccess = "OnAjaxRequestSuccessFromDdl",
+                                 //OnComplete = "OnAjaxRequestComplete",
+                                 // AllowCache = true,
+                                 // Confirm = "Are you sure you want to update the time?"
+                             }, new { @class = "btn btn-primary", id = "clientSearchBtn" })
             @Html.ActionLink("Create New", "", "Sale", new { @class = "btn btn-default" })
         </div>
         @*@Html.LabelFor(m => Model.)
@@ -56,6 +72,8 @@
     <input type="submit" value="Create" />
 }
 
+<button id="chooseOther" hidden="hidden" class="btn btn-danger">Choose Other Option</button>
+
 <style scoped>
     .k-datetimepicker
     {
@@ -69,3 +87,28 @@
         background: url('@Url.Content("~/content/web/datepicker/todo.png")') transparent no-repeat 0 0;
     }
 </style>
+
+<script type="text/javascript">
+    (function onPAgeLoad() {
+        $('#chooseOther').hide();
+    })()
+    function OnAjaxRequestBegin() {
+        console.log("This is the OnBegin Callback");
+    }
+    function OnAjaxRequestSuccessFromDdl(data) {
+        $('#clientDdlBtn').hide();
+        $('#clientSearchBtn').hide();
+
+        $('#chooseOther').show().on('click', function () {
+            $('#clientDdlBtn').show();
+            $('#clientSearchBtn').show();
+            $('#clientsDdl').hide();
+        });
+    }
+    function OnAjaxRequestFailure(request, error) {
+        console.log("This is the OnFailure Callback:" + error);
+    }
+    function OnAjaxRequestComplete(request, status) {
+        console.log("This is the OnComplete Callback: " + status);
+    }
+</script>
