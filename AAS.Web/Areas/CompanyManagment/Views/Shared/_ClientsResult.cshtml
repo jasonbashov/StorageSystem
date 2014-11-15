@@ -1,0 +1,10 @@
+﻿@using AAS.Web.Areas.CompanyManagment.Models.Sale
+@model NewSaleInputModel
+
+<div>
+    <strong>Name: </strong>
+    @Html.TextBoxFor(m => Model.ClientName, new { @readonly = "readonly" })
+    <br />
+    <strong>Bulstrad: </strong>
+    @Html.TextBoxFor(m => Model.ClientBulstrad, new { @readonly = "readonly" })
+</div>

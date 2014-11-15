@@ -18,6 +18,10 @@
         [Required]
         public int ClientId { get; set; }
 
+        public string ClientBulstrad { get; set; }
+
+        public string ClientName { get; set; }
+
         [Required]
         public int CompanyId { get; set; }
 

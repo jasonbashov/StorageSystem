@@ -11,6 +11,7 @@
     using AutoMapper;
     using AAS.Models;
     using System.Collections.Generic;
+    using AAS.Web.Areas.CompanyManagment.Models.Client;
 
     public class SaleController : AuthorizeUserController
     {
@@ -114,11 +115,19 @@
 
         public ActionResult Search(string query)
         {
-            var result = this.Data.Clients.All()
+            var clientViewModel = this.Data.Clients.All()
                 .AsQueryable()
-                .Where(c => c.Bulstrad.ToLower().Contains(query.ToLower()));
+                .Where(c => c.Bulstrad.ToLower().Contains(query.ToLower()))
+                .Project().To<ClientViewModel>()
+                .FirstOrDefault();
 
-            return this.PartialView("_BookResult", result);
+            var result = new NewSaleInputModel()
+            {
+                ClientBulstrad = clientViewModel.Bulstrad,
+                ClientName = clientViewModel.Name
+            };
+
+            return this.PartialView("_ClientsResult", result);
         }
 
         public ActionResult ChooseFromDropdown(int id)
@@ -135,6 +144,12 @@
             ViewData["clientDdl"] = li;
 
             return this.PartialView("_ClientDdl");
+        }
+
+        [HttpGet]
+        public ActionResult SearchByBulstrad()
+        {
+            return PartialView("_ClientSearchForm");
         }
     }
 }

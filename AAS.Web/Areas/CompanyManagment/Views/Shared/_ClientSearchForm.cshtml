@@ -1,0 +1,18 @@
+﻿@model AAS.Web.Areas.CompanyManagment.Models.Sale.NewSaleInputModel
+
+<div id="searchFormWrapper">
+    @using (Ajax.BeginForm("Search",
+    new AjaxOptions
+    {
+        UpdateTargetId = "clientDdl",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST"
+    }))
+    {
+        <input type="text" name="query" />
+        <input type="submit" />
+    }
+    <div id="results">
+
+    </div>
+</div>
