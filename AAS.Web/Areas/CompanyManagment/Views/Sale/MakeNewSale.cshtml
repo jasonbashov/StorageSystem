@@ -45,7 +45,7 @@
             <strong class="col-md-1 control-label">Client</strong>
             <div id="clientDdl"></div>
             <div id="clientDdlLoading" style="display: none">Loading...</div>
-            @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Sale",
+            @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Client",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -56,7 +56,7 @@
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
                              }, new { @class = "btn btn-primary", id = "clientDdlBtn" })
 
-            @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
+            @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Client",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -67,7 +67,7 @@
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
                              }, new { @class = "btn btn-primary", id = "clientSearchBtn" })
 
-            @Ajax.ActionLink("Create New", "CreateNewClient", "Sale",
+            @Ajax.ActionLink("Create New", "CreateNewClient", "Client",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
