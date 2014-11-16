@@ -7,6 +7,24 @@
     @RenderSection("scripts", required: false)
 }
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Warning!</h4>
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Success!</h4>
+        @TempData["Success"]
+    </div>
+}
+
 @RenderBody()
 
 @section scripts{

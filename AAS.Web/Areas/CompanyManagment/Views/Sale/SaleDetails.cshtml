@@ -1,4 +1,4 @@
-﻿@model AAS.Web.Areas.CompanyManagment.Models.Sale.SaleViewModel
+﻿@model AAS.Web.Areas.CompanyManagment.Models.Sale.SaleDetailsViewModel
 @{
     ViewBag.Title = "Sale Details";
 }
@@ -11,6 +11,12 @@
     </div>
     <div class="panel-body">
         <strong>Date of current sale:</strong> @Model.DateOfSale
+        <br />
+        <strong>Client Name:</strong> @Model.Client.Name
+        <br />
+        <strong>Client Address:</strong> @Model.Client.Adress
+        <br />
+        <strong>Client Bulstat:</strong> @Model.Client.Bulstat
         <br />
         <div class="jumbotron">
             @foreach (var soldStock in Model.SoldStocks)

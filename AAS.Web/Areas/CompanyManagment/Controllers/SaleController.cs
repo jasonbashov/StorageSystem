@@ -48,7 +48,7 @@
                             .Sales.All()
                             .AsQueryable()
                             .Project()
-                            .To<SaleViewModel>().FirstOrDefault(s => s.Id == id);
+                            .To<SaleDetailsViewModel>().FirstOrDefault(s => s.Id == id);
 
             if (sale == null)
             {
@@ -171,12 +171,19 @@
 
             this.Data.Sales.Add(sale);
             this.Data.SaveChanges();
-            System.Console.WriteLine();
 
-            //TempData["Success"] = "Company created successfuly";
+            var newSaleFromDb = this.Data.Sales.All().FirstOrDefault(s => s.DateOfSale == sale.DateOfSale);
+            var newSaleId = 0;
+
+            if (newSaleFromDb != null)
+            {
+                newSaleId = newSaleFromDb.Id;
+            }
+
+            TempData["Success"] = "New sale created successfuly";
             //TODO: redirect to "faktura" page
 
-            return RedirectToAction("Index", "Home", new { Area = String.Empty });
+            return RedirectToAction("SaleDetails", "Sale", new { id = newSaleId });
         }
         
         
