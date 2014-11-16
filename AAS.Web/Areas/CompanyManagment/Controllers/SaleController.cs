@@ -99,8 +99,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateNewSale(int id, NewSaleInputModel newSale)
+        public ActionResult MakeNewSale(int id, NewSaleInputModel newSale)
         {
+            var currClient = this.Data.Clients.All().FirstOrDefault(c => (c.Bulstat == newSale.ClientBulstat) || (c.Id == newSale.ClientId));
+            
+            if (currClient == null)
+            {
+                TempData["Error"] = "No user with such id";
+                return View("MakeNewSale", newSale);
+            }
+
+            newSale.ClientBulstat = currClient.Bulstat;
+
             if (!ModelState.IsValid)
             {
                 return View("MakeNewSale", newSale);
@@ -140,7 +150,6 @@
             }
 
             var currCompany = this.Data.Companies.All().FirstOrDefault(c => c.Id == id);
-            var currClient = this.Data.Clients.All().FirstOrDefault(c => (c.Bulstat == newSale.ClientBulstat) || (c.Id == newSale.ClientId));
             //var companyClient = currCompany.Clients.Contains(currClient);
 
             if (!currCompany.Clients.Contains(currClient))
@@ -214,6 +223,12 @@
                 .Where(c => c.Bulstat.ToLower().Contains(query.ToLower()))
                 .Project().To<ClientViewModel>()
                 .FirstOrDefault();
+
+            if (clientViewModel == null)
+            {
+                //TempData["Error"] = "No shuch user with this bulstat";
+                return this.PartialView("_ClientsResult");
+            }
 
             var result = new NewSaleInputModel()
             {

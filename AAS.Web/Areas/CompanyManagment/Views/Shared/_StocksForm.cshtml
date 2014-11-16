@@ -4,9 +4,10 @@
 <div class="jumbotron">
     @for (int i = 0; i < ViewBag.StocksCount; i++)
     {
-        <div class="form-control">
+        <div class="row">
             @Html.DropDownListFor(m => Model.Id, ViewData["stockDdl"] as List<SelectListItem>, new { id = "clientsDdl", @class = "col-md-6 form-control", Name = "SoldStocks[" + @i + "].Id" })
             @Html.TextBoxFor(m => Model.QuantitySold, new { Name = "SoldStocks[" + @i + "].QuantitySold", @class = "col-md-6 form-control", placeholder = "Quantity Sold", min = "1" })
         </div>
+
     }
 </div>

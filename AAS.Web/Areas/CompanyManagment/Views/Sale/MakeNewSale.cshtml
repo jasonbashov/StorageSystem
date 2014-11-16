@@ -21,7 +21,7 @@
         <input type="submit" value="Add" class="btn btn-default" />
     }
 
-    @using (Html.BeginForm("CreateNewSale", "Sale",
+    @using (Html.BeginForm("MakeNewSale", "Sale",
                            new { id = Model.CompanyId },
                            FormMethod.Post,
                            new { @class = "form-horizontal",role = "form" }))

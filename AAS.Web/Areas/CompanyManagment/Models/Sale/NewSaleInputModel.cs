@@ -20,7 +20,6 @@
         [Required]
         public int ClientId { get; set; }
         
-        [Required]
         [StringLength(11, MinimumLength = 11)]
         public string ClientBulstat { get; set; }
 
