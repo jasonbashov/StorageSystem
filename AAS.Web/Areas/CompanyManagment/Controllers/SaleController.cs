@@ -140,7 +140,7 @@
             }
 
             var currCompany = this.Data.Companies.All().FirstOrDefault(c => c.Id == id);
-            var currClient = this.Data.Clients.All().FirstOrDefault(c => c.Bulstrad == newSale.ClientBulstrad);
+            var currClient = this.Data.Clients.All().FirstOrDefault(c => (c.Bulstat == newSale.ClientBulstat) || (c.Id == newSale.ClientId));
             //var companyClient = currCompany.Clients.Contains(currClient);
 
             if (!currCompany.Clients.Contains(currClient))
@@ -189,17 +189,17 @@
             {
                 Name = inputClient.Name,
                 Adress = inputClient.Adress,
-                Bulstrad = inputClient.Bulstrad
+                Bulstat = inputClient.Bulstat
             };
 
             this.Data.Clients.Add(newClient);
             this.Data.SaveChanges();
 
-            var dbClient = this.Data.Clients.All().FirstOrDefault(c => c.Bulstrad == inputClient.Bulstrad);
+            var dbClient = this.Data.Clients.All().FirstOrDefault(c => c.Bulstat == inputClient.Bulstat);
 
             var result = new NewSaleInputModel()
             {
-                ClientBulstrad = dbClient.Bulstrad,
+                ClientBulstat = dbClient.Bulstat,
                 ClientName = dbClient.Name,
                 ClientId = dbClient.Id
             };
@@ -211,13 +211,13 @@
         {
             var clientViewModel = this.Data.Clients.All()
                 .AsQueryable()
-                .Where(c => c.Bulstrad.ToLower().Contains(query.ToLower()))
+                .Where(c => c.Bulstat.ToLower().Contains(query.ToLower()))
                 .Project().To<ClientViewModel>()
                 .FirstOrDefault();
 
             var result = new NewSaleInputModel()
             {
-                ClientBulstrad = clientViewModel.Bulstrad,
+                ClientBulstat = clientViewModel.Bulstat,
                 ClientName = clientViewModel.Name
             };
 

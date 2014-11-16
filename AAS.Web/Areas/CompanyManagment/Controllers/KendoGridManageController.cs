@@ -30,8 +30,14 @@
         [HttpPost]
         public ActionResult Read([DataSourceRequest]DataSourceRequest request)
         {
-            var ads =
-                this.GetData().ToDataSourceResult(request);
+            var data = this.GetData();
+
+            if (data == null)
+            {
+                return this.Json(data);
+            }
+
+            var ads = data.ToDataSourceResult(request);
 
             return this.Json(ads);
         }

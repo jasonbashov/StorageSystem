@@ -10,7 +10,6 @@
         [HttpGet]
         public ActionResult ManageMyCompany(int id)
         {
-            var currUserId = this.CurrentUser.Id;
             var searchedCompany = this.Data.Companies.All().First(c => c.Id == id);
 
             if (searchedCompany == null)

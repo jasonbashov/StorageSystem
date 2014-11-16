@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace AAS.Web.Controllers
+﻿namespace AAS.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+
     public class HomeController : BaseController
     {
         public ActionResult Index()
@@ -15,7 +13,7 @@ namespace AAS.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Our mission";
 
             return View();
         }
@@ -34,8 +32,7 @@ namespace AAS.Web.Controllers
             }
 
             var userCompaniesAsList = this.Data.Companies.All().Where(c => c.OwnerId == userAsOwner.Id).ToList();
-            //ViewData["myCompanies"] = userCompanies;
-
+            
             List<SelectListItem> li = new List<SelectListItem>();
 
             foreach (var company in userCompaniesAsList)

@@ -6,6 +6,7 @@
 
     using AAS.Models;
     using AAS.Web.Infrastructure;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class NewSaleInputModel : IMapFrom<Sale>
     {
@@ -18,8 +19,10 @@
 
         [Required]
         public int ClientId { get; set; }
-
-        public string ClientBulstrad { get; set; }
+        
+        [Required]
+        [StringLength(11, MinimumLength = 11)]
+        public string ClientBulstat { get; set; }
 
         public string ClientName { get; set; }
 

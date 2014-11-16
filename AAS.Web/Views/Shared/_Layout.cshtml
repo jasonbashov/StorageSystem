@@ -25,8 +25,18 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { Area = "" }, new { })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { Area = "" }, new { })</li>
-                    <li>@Html.ActionLink("Manage", "Manage", "Home", new { Area = "" }, new { })</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Manage", "Manage", "Home", new { Area = "" }, new { })</li>
+                    }
                     <li>@Html.ActionLink("Companies", "Companies", "Home", new { Area = "" }, new { })</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (this.User.IsInRole(AAS.Common.GlobalConstants.AdminRole))
+                        {
+                            <li>@Html.ActionLink("Administration", "Index", "Home", new { Area = "Administration" }, new { })</li>
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,7 +46,12 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="text-center">
+                <p>
+                    &copy; @DateTime.Now.Year - Awesome Adequate Storage!
+                    <strong>Author: </strong> <a href="https://github.com/jasonbashov">jasonbashov</a>
+                </p>
+            </div>
         </footer>
     </div>
     @Scripts.Render("~/bundles/unobtrusive")

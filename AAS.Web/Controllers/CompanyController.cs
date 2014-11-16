@@ -1,25 +1,23 @@
 ﻿namespace AAS.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
     
+    using AutoMapper.QueryableExtensions;
+    
+    using AAS.Common;
     using AAS.Models;
     using AAS.Web.Models;
-
-    using AutoMapper.QueryableExtensions;
     using AAS.Web.Models.Company;
 
     public class CompanyController : AuthorizeUserController
     {
-        // GET: Companies
         public ActionResult Index()
         {
             return View();
         }
 
+        //TODO: start cache
         //[OutputCache(Duration = 15 * 60)]
         [HttpGet]
         [AllowAnonymous]
@@ -43,18 +41,6 @@
         [HttpGet]
         public ActionResult CreateNewCompany()
         {
-            //TODO return createNewCompany Input Model
-            //var currentUserId = Microsoft.AspNet.Identity.IdentityExtensions.GetUserId(this.User.Identity);
-
-            //var currentUserAsOwner = this.Data.Owners.All().FirstOrDefault(o => o.UserId == currentUserId);
-            
-            //if (currentUserAsOwner == null)
-            //{
-            //    return View();
-            //}
-
-            //var newCompany = new CompanyInputModel() { AccountablePerson = currentUserAsOwner.FullName };
-
             return View();
         }
 
@@ -70,14 +56,14 @@
             //give default picture
             if (company.ImgUrl == null)
             {
-                company.ImgUrl = "http://www.securitypros.co.za/images/frontend/main/file_1379335265.png";
+                company.ImgUrl = GlobalConstants.NoLogoUrl;
             }
 
             var newCompany = new Company()
             {
                 Name = company.Name,
                 Adress = company.Adress,
-                Bulstrad = company.Bulstrad,
+                Bulstat = company.Bulstat,
                 ImgUrl = company.ImgUrl,
                 AccountablePerson = company.AccountablePerson
             };

@@ -1,6 +1,5 @@
 ﻿namespace AAS.Web.Controllers
 {
-    using System.Configuration;
     using System.Threading;
     using System.Web.Mvc;
 

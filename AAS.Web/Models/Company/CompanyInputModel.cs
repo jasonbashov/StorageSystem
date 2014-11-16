@@ -11,7 +11,8 @@
         public string Adress { get; set; }
         
         [Required]
-        public string Bulstrad { get; set; }
+        [StringLength(11, MinimumLength = 11)]
+        public string Bulstat { get; set; }
 
         [Required]
         public string AccountablePerson { get; set; }

@@ -1,8 +1,14 @@
 ﻿@using AAS.Web.Areas.CompanyManagment.Models.Sale
 @model IList<SaleViewModel>
 
-<h2>View My Stocks from AREA</h2>
+<h2>View My Stocks</h2>
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-dismissable alert-danger">
+        @TempData["Error"]
+    </div>
+}
 @(Html.Kendo()
               .Grid<SaleViewModel>(Model)
       .Name("Grid")

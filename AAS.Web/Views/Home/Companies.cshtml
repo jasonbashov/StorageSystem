@@ -4,22 +4,25 @@
 
 @Html.Partial("_PageHeader")
 
-<h2>@ViewBag.Title</h2>
-<div class="jumbotron">
-    <h4>
-        Here you can view all companies registered in our system.
-        <br />
-        Also you can register new company or view your registered companies.
-    </h4>
-    <span>
-        @Html.ActionLink("Create new company", "CreateNewCompany", "Company", null, new { @class = "btn btn-success" })
-    </span>
-    <span>
-        @Html.ActionLink("View registered companies", "ViewRegisteredCompanies", "Company", new { id = 0 }, new { @class = "btn btn-default" })
-    </span>
-    <span>
-        @Html.ActionLink("View your registered companies", "ViewMyCompanies", "Company", new { id = 0 }, new { @class = "btn btn-info" })
-    </span>
+<div class="text-center">
+    <h2>@ViewBag.Title</h2>
+    <div class="jumbotron">
+        <h4>
+            Here you can view all companies registered in our system.
+            <br />
+            Also you can register new company or view your registered companies.
+        </h4>
+        <span>
+            @Html.ActionLink("Create new company", "CreateNewCompany", "Company", null, new { @class = "btn btn-success" })
+        </span>
+        <span>
+            @Html.ActionLink("View registered companies", "ViewRegisteredCompanies", "Company", new { id = 0 }, new { @class = "btn btn-default" })
+        </span>
+        <span>
+            @Html.ActionLink("View your registered companies", "ViewMyCompanies", "Company", new { id = 0 }, new { @class = "btn btn-info" })
+        </span>
+    </div>
 </div>
+
 
 

@@ -11,7 +11,7 @@
       .Name("Grid")
       .Columns(cols =>
       {
-          cols.Bound(pr => pr.Id);
+          cols.Bound(pr => pr.Id).Hidden();
           cols.Bound(pr => pr.Name);
           cols.Bound(pr => pr.Price);
           cols.Bound(pr => pr.Quantity);

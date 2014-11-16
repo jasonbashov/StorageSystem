@@ -21,35 +21,31 @@
         <input type="submit" value="Add" class="btn btn-default" />
     }
 
-    @using (Html.BeginForm("CreateNewSale", "Sale", new
-                           {
-                               id = Model.CompanyId
-                           }, FormMethod.Post, new
-                           {
-                               @class = "form-horizontal",
-                               role = "form"
-                           }))
+    @using (Html.BeginForm("CreateNewSale", "Sale",
+                           new { id = Model.CompanyId },
+                           FormMethod.Post,
+                           new { @class = "form-horizontal",role = "form" }))
     {
-        
+
         @Html.AntiForgeryToken()
         @Html.ValidationSummary()
 
-        <fieldset>
+    <fieldset>
 
-            <legend>Create New Sale</legend>
+        <legend>Create New Sale</legend>
 
-            <div class="form-group">
-                @Html.LabelFor(m => Model.DateOfSale, new { @class = "col-md-1 control-label" })
-                @(Html.Kendo().DateTimePickerFor(m => Model.DateOfSale)
-              .Name("DateOfSale")
-                  .Value(DateTime.Now)
-                  .HtmlAttributes(new { required = "required", @class = "col-md-6 form-control" }))
-            </div>
-            <div class="form-group">
-                <strong class="col-md-1 control-label">Client</strong>
-                <div id="clientDdl"></div>
-                <div id="clientDdlLoading" style="display: none">Loading...</div>
-                @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Sale",
+        <div class="form-group">
+            @Html.LabelFor(m => Model.DateOfSale, new { @class = "col-md-1 control-label" })
+            @(Html.Kendo().DateTimePickerFor(m => Model.DateOfSale)
+                              .Name("DateOfSale")
+                              .Value(DateTime.Now)
+                              .HtmlAttributes(new { required = "required", @class = "col-md-6 form-control" }))
+        </div>
+        <div class="form-group">
+            <strong class="col-md-1 control-label">Client</strong>
+            <div id="clientDdl"></div>
+            <div id="clientDdlLoading" style="display: none">Loading...</div>
+            @Ajax.ActionLink("Choose From My Clients", "ChooseFromDropdown", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -60,7 +56,7 @@
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
                              }, new { @class = "btn btn-primary", id = "clientDdlBtn" })
 
-                @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
+            @Ajax.ActionLink("Search By Bulstrad", "SearchByBulstrad", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -71,7 +67,7 @@
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
                              }, new { @class = "btn btn-primary", id = "clientSearchBtn" })
 
-                @Ajax.ActionLink("Create New", "CreateNewClient", "Sale",
+            @Ajax.ActionLink("Create New", "CreateNewClient", "Sale",
                              new { id = Model.CompanyId },
                              new AjaxOptions
                              {
@@ -81,22 +77,13 @@
                                  InsertionMode = InsertionMode.Replace,
                                  OnSuccess = "OnAjaxRequestSuccessFromDdl",
                              }, new { @class = "btn btn-success", id = "clientCreateBtn" })
-            </div>
-            <div class="form-group">
-                <strong class="col-md-1 control-label">Stocks</strong>
-                <div id="stocksContainer"></div>
-                @*@Ajax.ActionLink("Add new Stock", "AddNewStock", "Stock",
-                    new { id = Model.CompanyId },
-                    new AjaxOptions
-                    {
-                        UpdateTargetId = "addNewStockContainer",
-                        HttpMethod = "GET",
-                        InsertionMode = InsertionMode.Replace,
-                        OnSuccess = "OnAjaxRequestSuccessFromAddNewStockBtn",
-                    }, new { @class = "btn btn-primary", id = "newStockBtn" })*@
-            </div>
-            <br />
-        </fieldset>
+        </div>
+        <div class="form-group">
+            <strong class="control-label">Stocks</strong>
+            <div id="stocksContainer"></div>
+        </div>
+        <br />
+    </fieldset>
         <input type="submit" value="Create" class="btn btn-success" />
     }
 </div>
@@ -114,10 +101,7 @@
 <script type="text/javascript">
     (function onPAgeLoad() {
         $('#chooseOther').hide();
-    })()
-    function OnAjaxRequestSuccessFromAddNewStockBtn() {
-
-    }
+    })();
     function OnAjaxRequestSuccessFromDdl(data) {
         $('#clientDdlBtn').hide();
         $('#clientSearchBtn').hide();
@@ -132,11 +116,5 @@
             $('#chooseOther').hide();
             $('#createClientWrapper').hide();
         });
-    }
-    function OnAjaxRequestFailure(request, error) {
-        console.log("This is the OnFailure Callback:" + error);
-    }
-    function OnAjaxRequestComplete(request, status) {
-        console.log("This is the OnComplete Callback: " + status);
     }
 </script>

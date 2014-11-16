@@ -481,7 +481,6 @@
     <Content Include="Areas\CompanyManagment\Views\Shared\_ClientSearchForm.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_ClientsResult.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_CreateNewClient.cshtml" />
-    <Content Include="Areas\CompanyManagment\Views\Shared\_ChooseStock.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_StocksForm.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

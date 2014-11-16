@@ -26,10 +26,22 @@
 
         protected override IEnumerable GetData()
         {
-            var companyId = int.Parse(TempData["cmpId"].ToString());
-            this.TempData["cmpId"] = companyId;
+            int companyId = 0;
+            try
+            {
+                int.TryParse(TempData["cmpId"].ToString(), out companyId);
+                this.TempData["cmpId"] = companyId;
 
-            return this.Data.Stocks.All().Where(s => s.CompanyId == companyId).AsQueryable().Project().To<SaleViewModel>();
+                return this.Data.Stocks.All().Where(s => s.CompanyId == companyId).AsQueryable().Project().To<SaleViewModel>();
+
+            }
+            catch (Exception)
+            {
+
+                this.TempData["Error"] = "No sales";
+            }
+
+            return null;
         }
 
         protected override T GetById<T>(object id)

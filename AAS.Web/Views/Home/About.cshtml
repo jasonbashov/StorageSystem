@@ -1,7 +1,18 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@Html.Partial("_PageHeader")
 
-<p>Use this area to provide additional information.</p>
+@{
+    ViewBag.Title = "About us";
+}
+<div class="text-center">
+    <h2>@ViewBag.Title.</h2>
+</div>
+<div class="jumbotron text-center">
+    <h3>@ViewBag.Message:</h3>
+
+    <p>
+        Hello, there! Our mission is to help small companies and sole traders to keep track of their storage.
+        It is easy to use and as simple as possible. We want our users to be an open community so stay tune
+        for the latest updates. Thank you and enjoy!
+    </p>
+</div>
+

@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     
     using AAS.Contracts;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Company : DeletableEntity
     {
@@ -32,7 +33,9 @@
         public string Adress { get; set; }
 
         [Required]
-        public string Bulstrad { get; set; }
+        [StringLength(11, MinimumLength = 11)]
+        [Index(IsUnique=true)]
+        public string Bulstat { get; set; }
 
         public string ImgUrl { get; set; }
 
