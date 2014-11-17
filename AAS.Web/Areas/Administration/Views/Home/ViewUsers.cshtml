@@ -1,0 +1,37 @@
+﻿@using AAS.Web.Areas.Administration.Models
+@model UsersViewModel
+@{
+    const string ControllerName = "UserGrid";
+    ViewBag.Title = "ViewUsers";
+}
+
+<h2>ViewUsers</h2>
+@(Html.Kendo()
+                  .Grid<UsersViewModel>()
+      .Name("Grid")
+      .Columns(cols =>
+      {
+          cols.Bound(pr => pr.Id);
+          cols.Bound(pr => pr.UserName);
+          cols.Bound(pr => pr.Email);
+          cols.Bound(pr => pr.IsDeleted);
+          cols.Bound(pr => pr.CreatedOn);
+          cols.Bound(pr => pr.ModifiedOn);
+          cols.Command(com => com.Edit()).Title("Промяна");
+          cols.Command(com => com.Destroy()).Title("Изтриване");
+      })
+      .ColumnMenu()
+        .Pageable()
+        .Sortable()
+        .Groupable()
+        .Filterable()
+            .Editable(edit => edit.Mode(GridEditMode.PopUp))
+      .DataSource(data => data
+          .Ajax()
+                .Model(m => m.Id(adv => adv.Id))
+                        .Read(read => read.Action("Read", ControllerName))
+                        .Create(create => create.Action("Create", ControllerName))
+                        .Update(update => update.Action("Update", ControllerName))
+                        .Destroy(destroy => destroy.Action("Destroy", ControllerName))
+            ))
+@*@(Html.FullFeaturedGrid<AAS.Web.Areas.Administration.Models.UsersViewModel>(ControllerName, m => m.Id))*@

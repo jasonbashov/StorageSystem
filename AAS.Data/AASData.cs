@@ -23,7 +23,7 @@
         {
             get
             {
-                return this.GetRepository<ApplicationUser>();
+                return this.GetDeletableEntityRepository<ApplicationUser>();
             }
         }
 

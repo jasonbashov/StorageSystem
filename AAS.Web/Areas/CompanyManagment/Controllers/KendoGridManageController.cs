@@ -54,27 +54,38 @@
 
             return null;
         }
-
         [NonAction]
         protected virtual void Update<TModel, TViewModel>(TViewModel model, object id)
-            where TModel : AuditInfo
-            where TViewModel : CompanyManagmentViewModel
+            where TModel : class
+            where TViewModel : class
         {
             if (model != null && ModelState.IsValid)
             {
                 var dbModel = this.GetById<TModel>(id);
                 Mapper.Map<TViewModel, TModel>(model, dbModel);
                 this.ChangeEntityStateAndSave(dbModel, EntityState.Modified);
-                model.ModifiedOn = dbModel.ModifiedOn;
             }
         }
+        //[NonAction]
+        //protected virtual void Update<TModel, TViewModel>(TViewModel model, object id)
+        //    where TModel : AuditInfo
+        //    where TViewModel : CompanyManagmentViewModel
+        //{
+        //    if (model != null && ModelState.IsValid)
+        //    {
+        //        var dbModel = this.GetById<TModel>(id);
+        //        Mapper.Map<TViewModel, TModel>(model, dbModel);
+        //        this.ChangeEntityStateAndSave(dbModel, EntityState.Modified);
+        //        model.ModifiedOn = dbModel.ModifiedOn;
+        //    }
+        //}
 
         protected JsonResult GridOperation<T>(T model, [DataSourceRequest]DataSourceRequest request)
         {
             return Json(new[] { model }.ToDataSourceResult(request, ModelState));
         }
 
-        private void ChangeEntityStateAndSave(object dbModel, EntityState state)
+        protected void ChangeEntityStateAndSave(object dbModel, EntityState state)
         {
             var entry = this.Data.Context.Entry(dbModel);
             entry.State = state;

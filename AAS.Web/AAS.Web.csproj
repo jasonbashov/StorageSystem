@@ -198,6 +198,7 @@
     <Compile Include="App_Start\ViewEnginesConfiguration.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Administration\Controllers\UserGridController.cs" />
     <Compile Include="Areas\Administration\Models\UsersViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\CompanyManagmentAreaRegistration.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\ClientController.cs" />
@@ -227,6 +228,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfig.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\KendoHelpers.cs" />
     <Compile Include="Infrastructure\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -467,7 +469,9 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\kendo\images\kendoui.ttf" />
     <Content Include="Content\kendo\images\kendoui.woff" />
-    <Content Include="Areas\Administration\Views\web.config" />
+    <Content Include="Areas\Administration\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Home\Index.cshtml" />
@@ -484,6 +488,7 @@
     <Content Include="Areas\CompanyManagment\Views\Shared\_ClientsResult.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_CreateNewClient.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_StocksForm.cshtml" />
+    <Content Include="Areas\Administration\Views\Home\ViewUsers.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -554,6 +559,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Views\UserGrid\" />
+    <Folder Include="Areas\Administration\Views\ViewUsers\" />
     <Folder Include="Areas\CompanyManagment\Views\Client\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthorizeUser\" />

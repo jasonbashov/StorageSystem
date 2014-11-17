@@ -19,11 +19,11 @@
             return View(users);
         }
 
-        public ActionResult ViewRegisteredUsers()
+        public ActionResult ViewUsers()
         {
             var users = this.Data.Users.All().AsQueryable().Project().To<UsersViewModel>().ToList();
 
-            return View(users);
+            return View();
         }
     }
 }
