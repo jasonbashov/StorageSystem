@@ -13,16 +13,22 @@
         // GET: Administration/Home
         public ActionResult Index()
         {
-            var users = this.Data.Users.All().ToList();
-            
 
-            return View(users);
+            return View();
+        }
+
+        public ActionResult ViewClients()
+        {
+            return View();
         }
 
         public ActionResult ViewUsers()
         {
-            var users = this.Data.Users.All().AsQueryable().Project().To<UsersViewModel>().ToList();
+            return View();
+        }
 
+        public ActionResult ViewCompanies()
+        {
             return View();
         }
     }

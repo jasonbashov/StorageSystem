@@ -1,6 +1,7 @@
 ﻿namespace AAS.Web.Areas.Administration.Controllers
 {
     using System.Collections;
+    using System.Globalization;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
@@ -8,15 +9,15 @@
     using AAS.Data;
     using AAS.Web.Areas.CompanyManagment.Controllers;
     using AAS.Web.Areas.Administration.Models;
+
     using Kendo.Mvc.UI;
-    using System.Globalization;
+    
+    using Model = AAS.Models.Client;
+    using ViewModel = AAS.Web.Areas.Administration.Models.ClientsViewModel;
 
-    using Model = AAS.Models.ApplicationUser;
-    using ViewModel = AAS.Web.Areas.Administration.Models.UsersViewModel;
-
-    public class UserGridController : KendoGridManageController
+    public class ClientGridController : KendoGridManageController
     {
-        public UserGridController(IAASData data)
+        public ClientGridController(IAASData data)
             : base(data)
         {
         }
@@ -28,12 +29,12 @@
 
         protected override IEnumerable GetData()
         {
-            return this.Data.Users.All().Project().To<UsersViewModel>();
+            return this.Data.Clients.All().Project().To<ClientsViewModel>();
         }
 
         protected override T GetById<T>(object id)
         {
-            return this.Data.Users.GetById(id) as T;
+            return this.Data.Clients.GetById(id) as T;
         }
 
         [HttpPost]
@@ -48,10 +49,18 @@
         {
             if (model != null && ModelState.IsValid)
             {
-                this.Data.Users.Delete(model.Id);
+                this.Data.Clients.Delete(model.Id);
                 this.Data.SaveChanges();
             }
 
+            return this.GridOperation(model, request);
+        }
+
+         [HttpPost]
+        public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
+        {
+            var dbModel = base.Create<Model>(model);
+            if (dbModel != null) model.Id = dbModel.Id;
             return this.GridOperation(model, request);
         }
 

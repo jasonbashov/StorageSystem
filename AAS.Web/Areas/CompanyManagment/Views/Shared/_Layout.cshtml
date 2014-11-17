@@ -28,5 +28,6 @@
 @RenderBody()
 
 @section scripts{
+    @RenderSection("myCustomScripts", required: false)
     @Scripts.Render("~/bundles/kendo")
 }

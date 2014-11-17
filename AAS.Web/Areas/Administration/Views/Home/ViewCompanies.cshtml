@@ -1,0 +1,39 @@
+﻿@using AAS.Web.Areas.Administration.Models
+@model IList<CompanyViewModel>
+@{
+    const string ControllerName = "CompanyGrid";
+    ViewBag.Title = "Companies";
+}
+
+<h2>Clients</h2>
+
+@(Html.Kendo()
+          .Grid<CompanyViewModel>()
+      .Name("Grid")
+      .Columns(cols =>
+      {
+          cols.Bound(pr => pr.Id);
+          cols.Bound(pr => pr.Name);
+          cols.Bound(pr => pr.Adress);
+          cols.Bound(pr => pr.Bulstat);
+          cols.Bound(pr => pr.AccountablePerson);
+          cols.Bound(pr => pr.IsDeleted);
+          cols.Bound(pr => pr.CreatedOn);
+          cols.Bound(pr => pr.ModifiedOn);
+          cols.Command(com => com.Edit()).Title("Промяна");
+          cols.Command(com => com.Destroy()).Title("Изтриване");
+      })
+      .ColumnMenu()
+        .Pageable()
+        .Sortable()
+        .Groupable()
+        .Filterable()
+        .Editable(edit => edit.Mode(GridEditMode.PopUp))
+        .DataSource(data => data
+        .Ajax()
+        .Model(m => m.Id(adv => adv.Id))
+                        .Read(read => read.Action("Read", ControllerName))
+                        .Create(create => create.Action("Create", ControllerName))
+                        .Update(update => update.Action("Update", ControllerName))
+                        .Destroy(destroy => destroy.Action("Destroy", ControllerName))
+            ))

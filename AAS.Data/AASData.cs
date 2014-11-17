@@ -31,7 +31,7 @@
         {
             get
             {
-                return this.GetRepository<Client>();
+                return this.GetDeletableEntityRepository<Client>();
             }
         }
 
@@ -39,7 +39,7 @@
         {
             get
             {
-                return this.GetRepository<Company>();
+                return this.GetDeletableEntityRepository<Company>();
             }
         }
 

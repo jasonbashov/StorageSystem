@@ -197,8 +197,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEnginesConfiguration.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\ClientGridController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CompanyGridController.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
     <Compile Include="Areas\Administration\Controllers\UserGridController.cs" />
+    <Compile Include="Areas\Administration\Models\ClientsViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\CompanyViewModel.cs" />
     <Compile Include="Areas\Administration\Models\UsersViewModel.cs" />
     <Compile Include="Areas\CompanyManagment\CompanyManagmentAreaRegistration.cs" />
     <Compile Include="Areas\CompanyManagment\Controllers\ClientController.cs" />
@@ -475,7 +479,7 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Administration\Views\Home\ViewRegisteredUsers.cshtml" />
+    <Content Include="Areas\Administration\Views\Home\ViewClients.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\web.config" />
     <Content Include="Areas\CompanyManagment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_Layout.cshtml" />
@@ -489,6 +493,7 @@
     <Content Include="Areas\CompanyManagment\Views\Shared\_CreateNewClient.cshtml" />
     <Content Include="Areas\CompanyManagment\Views\Shared\_StocksForm.cshtml" />
     <Content Include="Areas\Administration\Views\Home\ViewUsers.cshtml" />
+    <Content Include="Areas\Administration\Views\Home\ViewCompanies.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -559,7 +564,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Views\UserGrid\" />
+    <Folder Include="Areas\Administration\Views\CompanyGrid\" />
     <Folder Include="Areas\Administration\Views\ViewUsers\" />
     <Folder Include="Areas\CompanyManagment\Views\Client\" />
     <Folder Include="Views\Admin\" />
