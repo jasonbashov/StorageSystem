@@ -6,23 +6,29 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    @Html.LabelFor(m => Model.Name)
-    @Html.TextBoxFor(m => Model.Name)
+
+    @Html.EditorFor(m => m.Name)
+    @*@Html.LabelFor(m => Model.Name)
+    @Html.TextBoxFor(m => Model.Name)*@
     <br />
-    @Html.LabelFor(m => Model.Adress)
-    @Html.TextBoxFor(m => Model.Adress)
+    @*@Html.LabelFor(m => Model.Adress)
+    @Html.TextBoxFor(m => Model.Adress)*@
+    @Html.EditorFor(m => m.Adress)
     <br />
-    @Html.LabelFor(m => Model.Bulstat)
-    @Html.TextBoxFor(m => Model.Bulstat)
+    @*@Html.LabelFor(m => Model.Bulstat)
+    @Html.TextBoxFor(m => Model.Bulstat)*@
+    @Html.EditorFor(m => m.Bulstat)
     <br />
-    @Html.LabelFor(m => Model.AccountablePerson)
-    @Html.TextBoxFor(m => Model.AccountablePerson)
+    @*@Html.LabelFor(m => Model.AccountablePerson)
+    @Html.TextBoxFor(m => Model.AccountablePerson)*@
+    @Html.EditorFor(m => m.AccountablePerson)
     <br />
-    @Html.LabelFor(m => Model.ImgUrl)
-    @Html.TextBoxFor(m => Model.ImgUrl)
+    @*@Html.LabelFor(m => Model.ImgUrl)
+    @Html.TextBoxFor(m => Model.ImgUrl)*@
+    @Html.EditorFor(m => m.ImgUrl)
     <br />
     //@Html.EditorForModel()
-    <input type="submit" value="Create"  />    
+    <input type="submit" value="Create" class="btn btn-success"/>
     //or this way:
-    // @Html.TextBoxFor(m => m.Name, new { @class = "rndClass"})             
+    // @Html.TextBoxFor(m => m.Name, new { @class = "rndClass"})
 }
