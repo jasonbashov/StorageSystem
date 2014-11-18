@@ -1,0 +1,16 @@
+﻿@using AAS.Web.Areas.CompanyManagment.Models.Sale
+@model ICollection<SoldStockViewModel>
+
+@foreach (var soldStock in Model)
+{
+    <strong>Stock Name: </strong> @Html.DisplayFor(m => soldStock.Name)  @*@soldStock.Name*@
+        <strong> | Single Unit Price: </strong> @Html.DisplayFor(m => soldStock.SingleUnitPrice) @*@soldStock.SingleUnitPrice*@
+        <strong> | Quantity Sold: </strong>@soldStock.QuantitySold
+        <strong> | Total: </strong>@Html.DisplayFor(m => soldStock.SumPrice)
+        <br />
+}
+@*<strong>Stock Name: </strong>@Model.Name
+<strong> | Single Unit Price: </strong>@Model.SingleUnitPrice
+<strong> | Quantity Sold: </strong>@Model.QuantitySold
+<strong> | Total: </strong>@Model.SumPrice
+<br />*@

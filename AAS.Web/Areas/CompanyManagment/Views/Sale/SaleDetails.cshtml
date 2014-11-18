@@ -12,22 +12,17 @@
     <div class="panel-body">
         <strong>Date of current sale:</strong> @Html.DisplayFor(s => s.DateOfSale)
         <br />
-        <strong>Client Name:</strong> @Model.Client.Name
+        <strong>Client Name:</strong> @Html.DisplayFor(s => s.Client.Name) @*@Model.Client.Name*@
         <br />
-        <strong>Client Address:</strong> @Model.Client.Adress
+        <strong>Client Address:</strong> @Html.DisplayFor(s => s.Client.Adress) @*@Model.Client.Adress*@
         <br />
-        <strong>Client Bulstat:</strong> @Model.Client.Bulstat
+        <strong>Client Bulstat:</strong> @Html.DisplayFor(s => s.Client.Bulstat) @*@Model.Client.Bulstat*@
         <br />
         <div class="jumbotron">
-            @foreach (var soldStock in Model.SoldStocks)
-            {
-                <strong>Stock Name: </strong>@soldStock.Name
-                <strong> | Single Unit Price: </strong>@soldStock.SingleUnitPrice
-                <strong> | Quantity Sold: </strong>@soldStock.QuantitySold
-                <strong> | Total: </strong>@soldStock.SumPrice
-                <br />
-            }
-            <strong>Sale's Total Cost: </strong> @Model.TotalCost
+
+            @Html.DisplayFor(m => m.SoldStocks)
+            
+            <strong>Sale's Total Cost: </strong> @Html.DisplayFor(m => Model.TotalCost)
         </div>
     </div>
 </div>

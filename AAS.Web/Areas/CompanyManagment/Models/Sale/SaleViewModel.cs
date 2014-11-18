@@ -23,7 +23,8 @@
         
         [Required]
         public int CompanyId { get; set; }
-
+        
+        [UIHint("Stocks")]
         public virtual ICollection<SoldStockViewModel> SoldStocks {get; set; }
         
     }
