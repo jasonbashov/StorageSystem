@@ -10,7 +10,7 @@
         <h3 class="panel-title">Sale Id: @Model.Id</h3>
     </div>
     <div class="panel-body">
-        <strong>Date of current sale:</strong> @Model.DateOfSale
+        <strong>Date of current sale:</strong> @Html.DisplayFor(s => s.DateOfSale)
         <br />
         <strong>Client Name:</strong> @Model.Client.Name
         <br />

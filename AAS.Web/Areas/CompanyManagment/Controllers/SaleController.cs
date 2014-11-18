@@ -76,9 +76,16 @@
              
             if (company == null)
             {
-                TempData["Error"] = "No such sale";
+                TempData["Error"] = "No such company";
 
                 return RedirectToAction("Index", "Home", new { Area = "" });
+            }
+
+            if (!company.Stocks.Any())
+            {
+                TempData["Error"] = "You have no stocks in the company";
+
+                return RedirectToAction("ManageMyCompany/" + company.Id , "Company", new { Area = "CompanyManagment" });
             }
 
             if (this.CurrentUser.Id != company.Owner.UserId)

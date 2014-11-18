@@ -248,6 +248,7 @@
     <Content Include="Content\bootstrap.paper.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\background-img.png" />
+    <Content Include="Content\img\grumpycat.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\paper_1024.jpg" />
     <Content Include="Content\kendo\Black\editor.png" />
@@ -494,6 +495,8 @@
     <Content Include="Areas\CompanyManagment\Views\Shared\_StocksForm.cshtml" />
     <Content Include="Areas\Administration\Views\Home\ViewUsers.cshtml" />
     <Content Include="Areas\Administration\Views\Home\ViewCompanies.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Areas\CompanyManagment\Views\Shared\EditorTemplates\SingleLineTextInput.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
