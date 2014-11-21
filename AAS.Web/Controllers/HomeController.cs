@@ -1,14 +1,51 @@
 ﻿namespace AAS.Web.Controllers
 {
+    using AAS.Web.Models;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
     public class HomeController : BaseController
     {
+        [OutputCache(Duration = 5 * 60)]
         public ActionResult Index()
         {
-            return View();
+            var homeStats = new HomeStatsView();
+
+            var companiesCount = this.Data.Companies.All();
+
+            if (companiesCount != null)
+            {
+                homeStats.RegCompanies = companiesCount.Count();
+            }
+            else
+            {
+                homeStats.RegCompanies = 0;
+            }
+
+            var allClients = this.Data.Clients.All();
+
+            if (companiesCount != null)
+            {
+                homeStats.RegClients = allClients.Count();
+            }
+            else
+            {
+                homeStats.RegClients = 0;
+            }
+
+            var allSales = this.Data.Sales.All();
+
+            if (companiesCount != null)
+            {
+                homeStats.NumberOfSales = allSales.Count();
+            }
+            else
+            {
+                homeStats.NumberOfSales = 0;
+            }
+
+            return View(homeStats);
         }
 
         public ActionResult About()

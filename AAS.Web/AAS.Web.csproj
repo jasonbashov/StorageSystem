@@ -238,6 +238,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Company\CompanyDetailsViewModel.cs" />
     <Compile Include="Models\Company\CompanyInputModel.cs" />
+    <Compile Include="Models\HomeStatsView.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -570,6 +571,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Text.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PriceDouble.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\HomeStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

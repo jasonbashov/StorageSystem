@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AAS.Web.Models.HomeStatsView
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -26,6 +27,21 @@
     </div>
 </div>
 
-<div class="row">
-    <h2>Some statistics</h2>
+<div class="row text-center">
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge">@Model.RegCompanies</span>
+                Registered Companies
+            </li>
+            <li class="list-group-item">
+                <span class="badge">@Model.RegClients</span>
+                Registered Clients
+            </li>
+            <li class="list-group-item">
+                <span class="badge">@Model.NumberOfSales</span>
+                Number of sales
+            </li>
+        </ul>
+    </div>
 </div>
