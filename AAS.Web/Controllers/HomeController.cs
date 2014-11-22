@@ -7,7 +7,7 @@
 
     public class HomeController : BaseController
     {
-        [OutputCache(Duration = 5 * 60)]
+        //[OutputCache(Duration = 5 * 60)]
         public ActionResult Index()
         {
             var homeStats = new HomeStatsView();
